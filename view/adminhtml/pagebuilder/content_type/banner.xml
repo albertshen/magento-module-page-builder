@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_PageBuilder:etc/content_type.xsd">
+    <type name="banner"
+          label="Banner"
+          component="Magento_PageBuilder/js/content-type"
+          preview_component="Albert_PageBuilder/js/content-type/banner/preview"
+          form="pagebuilder_banner_form"
+          menu_section="media"
+          icon="icon-pagebuilder-banner"
+          sortOrder="30"
+          translate="label">
+        <appearances>
+            <appearance name="collage-left">
+                <elements>
+                    <element name="wrapper">
+                        <attribute name="video_type" source="data-video-type" />
+                        <attribute name="video_source_upload" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_source" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                    </element>
+                </elements>
+            </appearance>
+            <appearance name="collage-centered">
+                <elements>
+                    <element name="wrapper">
+                        <attribute name="video_type" source="data-video-type" />
+                        <attribute name="video_source_upload" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_source" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                    </element>
+                </elements>
+            </appearance>
+            <appearance name="poster">
+                <elements>
+                    <element name="wrapper">
+                        <attribute name="video_type" source="data-video-type" />
+                        <attribute name="video_source_upload" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_source" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                    </element>
+                </elements>
+            </appearance>
+        </appearances>
+    </type>
+</config>

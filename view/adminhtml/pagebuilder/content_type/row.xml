@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_PageBuilder:etc/content_type.xsd">
+    <type name="row"
+          label="Row"
+          component="Magento_PageBuilder/js/content-type-collection"
+          preview_component="Magento_PageBuilder/js/content-type/row/preview"
+          master_component="Magento_PageBuilder/js/content-type/master-collection"
+          form="pagebuilder_row_form"
+          menu_section="layout"
+          icon="icon-pagebuilder-row"
+          sortOrder="1"
+          translate="label">
+        <appearances>
+            <appearance name="contained">
+                    <elements>
+                        <element name="inner">
+                            <attribute name="video_type" source="data-video-type" />
+                            <attribute name="video_source_upload" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                            <attribute name="video_source" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        </element>
+                    </elements>
+            </appearance>
+            <appearance name="full-width">
+                <elements>
+                    <element name="main">
+                        <attribute name="video_type" source="data-video-type" />
+                        <attribute name="video_source_upload" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_source" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                    </element>
+                </elements>
+            </appearance>
+            <appearance name="full-bleed">
+                <elements>
+                    <element name="main">
+                        <attribute name="video_type" source="data-video-type" />
+                        <attribute name="video_source_upload" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_source" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                    </element>
+                </elements>
+            </appearance>
+        </appearances>
+    </type>
+</config>
