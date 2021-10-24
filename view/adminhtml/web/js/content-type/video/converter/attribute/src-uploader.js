@@ -64,11 +64,14 @@ define(["Magento_PageBuilder/js/config", "Albert_PageBuilder/js/utils/video", "M
 
         var value = (0, _object.get)(data, name);
 
-        var videoUrl = value[0].url;
-        var mediaUrl = (0, _url.convertUrlToPathIfOtherUrlIsOnlyAPath)(_config.getConfig("media_url"), videoUrl);
-        var mediaPath = videoUrl.split(mediaUrl);
-        var type = value[0].type.split('/');
-        return type[1] + ":{{media url=" + mediaPath[1] + "}}";
+        if (value && typeof value[0] == "object") {
+          var videoUrl = value[0].url;
+          var mediaUrl = (0, _url.convertUrlToPathIfOtherUrlIsOnlyAPath)(_config.getConfig("media_url"), videoUrl);
+          var mediaPath = videoUrl.split(mediaUrl);
+          var type = value[0].type.split('/');
+          return type[1] + ":{{media url=" + mediaPath[1] + "}}";
+        }
+        return "";
       }
 
     };
