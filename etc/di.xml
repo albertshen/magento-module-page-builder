@@ -1,3 +1,20 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="VideoTypeSource" type="Magento\PageBuilder\Model\Source\VisualSelect">
+        <arguments>
+            <argument name="optionsSize" xsi:type="string">small</argument>
+            <argument name="optionsData" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="value" xsi:type="string">uploader</item>
+                    <item name="title" xsi:type="string" translate="true">Uploader</item>
+                    <item name="icon" xsi:type="string">Magento_PageBuilder::css/images/form/element/visual-select/background-type/video.svg</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="value" xsi:type="string">link</item>
+                    <item name="title" xsi:type="string" translate="true">Link</item>
+                    <item name="icon" xsi:type="string">Magento_PageBuilder::css/images/form/element/visual-select/background-type/video.svg</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>
