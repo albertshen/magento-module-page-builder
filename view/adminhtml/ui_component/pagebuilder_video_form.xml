@@ -46,7 +46,7 @@
                         <allowedExtensions>mp4</allowedExtensions>
                         <required>true</required>
                         <uploaderConfig>
-                            <param xsi:type="string" name="url">learning/file/upload</param>
+                            <param xsi:type="string" name="url">albert_pagebuilder/file/upload</param>
                         </uploaderConfig>
                     </settings>
                 </fileUploader>
