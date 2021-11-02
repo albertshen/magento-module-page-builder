@@ -21,8 +21,8 @@
                     <elements>
                         <element name="inner">
                             <attribute name="video_type" source="data-video-type" />
-                            <attribute name="video_source_upload" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
-                            <attribute name="video_source" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                            <attribute name="video_source_upload" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                            <attribute name="video_source" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
                         </element>
                     </elements>
             </appearance>
@@ -30,8 +30,8 @@
                 <elements>
                     <element name="main">
                         <attribute name="video_type" source="data-video-type" />
-                        <attribute name="video_source_upload" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
-                        <attribute name="video_source" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_source_upload" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_source" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
                     </element>
                 </elements>
             </appearance>
@@ -39,8 +39,8 @@
                 <elements>
                     <element name="main">
                         <attribute name="video_type" source="data-video-type" />
-                        <attribute name="video_source_upload" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
-                        <attribute name="video_source" source="data-video-src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_source_upload" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_source" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
                     </element>
                 </elements>
             </appearance>

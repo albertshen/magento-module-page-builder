@@ -13,8 +13,8 @@
                     <element name="video">
                         <attribute name="poster" source="poster" converter="Magento_PageBuilder/js/converter/attribute/src" preview_converter="Magento_PageBuilder/js/converter/attribute/preview/src"/>
                         <attribute name="video_type" source="data-video-type" />
-                        <attribute name="video_source_upload" source="src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/videosrc-uploader" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/videosrc"/>
-                        <attribute name="video_source" source="src" converter="Albert_PageBuilder/js/content-type/video/converter/attribute/videosrc" preview_converter="Albert_PageBuilder/js/content-type/video/converter/attribute/preview/videosrc"/>
+                        <attribute name="video_source_upload" source="src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/videosrc-uploader" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/videosrc"/>
+                        <attribute name="video_source" source="src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/videosrc" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/videosrc"/>
                     </element>
                 </elements>
             </appearance>

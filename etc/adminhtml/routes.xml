@@ -7,7 +7,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="admin">
         <route id="albert_pagebuilder" frontName="albert_pagebuilder">
-            <module name="Albert_PageBuilder" />
+            <module name="AlbertMage_PageBuilder" />
         </route>
     </router>
 </config>
