@@ -17,6 +17,11 @@ class Parser implements \AlbertMage\PageBuilder\Api\ParserInterface
     protected $parserPool;
 
     /**
+     * @var \AlbertMage\PageBuilder\Model\Link
+     */
+    protected $link;
+
+    /**
      * @var string
      */
     protected $appearance;
@@ -28,13 +33,17 @@ class Parser implements \AlbertMage\PageBuilder\Api\ParserInterface
 
     /**
      * @param \AlbertMage\PageBuilder\Model\ParserPool
+     * @param \AlbertMage\PageBuilder\Model\Link
+     * @param array
      */
     public function __construct(
         \AlbertMage\PageBuilder\Model\ParserPool $parserPool,
+        \AlbertMage\PageBuilder\Model\Link $link,
         array $attributes = []
     )
     {
         $this->parserPool = $parserPool;
+        $this->link = $link;
         $this->attributes = $attributes;
     }
 
@@ -58,23 +67,24 @@ class Parser implements \AlbertMage\PageBuilder\Api\ParserInterface
         $element = $domElement->getAttribute('data-element');
 
         $data = [];
-        
+
         if (isset($this->attributes[$this->appearance][$element])) {
             $data = $this->extractAttributes($domElement, $this->attributes[$this->appearance][$element]);
         } else {
             if (isset($this->attributes['default'][$element])) {
                 $data = $this->extractAttributes($domElement, $this->attributes['default'][$element]);
             }
+            if ($element === 'link') {
+                $data = array_merge($data, ['path' => 'page/dd/22']);
+            }
         }
 
-        $childElement = $domElement->childNodes->item(0);
-
-        if ($domElement->childNodes->length === 1 && $childElement->getAttribute('data-element') !== 'main') {
-            $data = array_merge($data, $this->doParse($childElement));
-        } else {
-            foreach ($domElement->childNodes as $node) {
+        foreach ($domElement->childNodes as $node) {
+            if ($node->getAttribute('data-element') === 'main') {
                 $contentType = $node->getAttribute('data-content-type');
                 $data['items'][] = $this->parserPool->create($contentType)->parse($node);
+            } else {
+                $data = array_merge($data, $this->doParse($node));
             }
         }
 
@@ -84,9 +94,12 @@ class Parser implements \AlbertMage\PageBuilder\Api\ParserInterface
     private function extractAttributes($domElement, $config)
     {
         $data = [];
-        foreach ($config as $attribute => $field) {
-            $key = $field ? $field : $attribute;
-            $data[$this->getFieldName($key)] = $domElement->getAttribute($attribute);
+        foreach ($config as $attribute => $parser) {
+            if ($parser instanceof \AlbertMage\PageBuilder\Api\AttributeParserInterface) {
+                $data[$this->getFieldName($attribute)] = $parser->parse($domElement->getAttribute($attribute));
+            } else {
+                $data[$this->getFieldName($attribute)] = $domElement->getAttribute($attribute);
+            }
         }
         return $data;
     }

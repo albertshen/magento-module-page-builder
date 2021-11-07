@@ -3,29 +3,37 @@
     <type name="AlbertMage\PageBuilder\Model\ParserPool">
         <arguments>
             <argument name="parserClassCollection" xsi:type="array">
-                <item name="row" xsi:type="string">AlbertMage\PageBuilder\Model\Parser\Row</item>
-                <item name="column" xsi:type="string">AlbertMage\PageBuilder\Model\Parser\Column</item>
-                <item name="video" xsi:type="string">AlbertMage\PageBuilder\Model\Parser\Video</item>
+                <item name="row" xsi:type="string">AlbertMage\PageBuilder\Model\Parser\ContentType\Row</item>
+                <item name="column" xsi:type="string">AlbertMage\PageBuilder\Model\Parser\ContentType\Column</item>
+                <item name="video" xsi:type="string">AlbertMage\PageBuilder\Model\Parser\ContentType\Video</item>
+                <item name="image" xsi:type="string">AlbertMage\PageBuilder\Model\Parser\ContentType\Image</item>
             </argument>
         </arguments>
     </type>
-    <type name="AlbertMage\PageBuilder\Model\Parser\Row">
+    <type name="AlbertMage\PageBuilder\Model\Link">
+        <arguments>
+            <argument name="linkProviderCollection" xsi:type="array">
+                <item name="default" xsi:type="object">AlbertMage\PageBuilder\Model\Link\DefaultApp</item>
+                <item name="wxapp" xsi:type="object">AlbertMage\PageBuilder\Model\Link\WeChatApp</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Parser\ContentType\Row">
         <arguments>
             <argument name="attributes" xsi:type="array">
                 <item name="contained" xsi:type="array">
                     <item name="main" xsi:type="array">
                         <item name="data-content-type" xsi:type="string"></item>
-                        <item name="1data-appearance" xsi:type="string"></item>
-                    </item>
-                    <item name="link" xsi:type="array">
-                        <item name="href" xsi:type="string">link</item>
+                        <item name="data-appearance" xsi:type="string"></item>
                     </item>
                     <item name="inner" xsi:type="array">
                         <item name="data-enable-parallax" xsi:type="string"></item>
                         <item name="data-parallax-speed" xsi:type="string"></item>
                         <item name="data-video-type" xsi:type="string"></item>
                         <item name="data-background-type" xsi:type="string"></item>
-                        <item name="data-background-images" xsi:type="string"></item>
+                        <item name="data-background-images" xsi:type="object">
+                            AlbertMage\PageBuilder\Model\Parser\Attribute\BackgroundImage
+                        </item>
                         <item name="data-video-src" xsi:type="string"></item>
                         <item name="data-video-loop" xsi:type="string"></item>
                         <item name="data-video-play-only-visible" xsi:type="string"></item>
@@ -52,13 +60,32 @@
             </argument>
         </arguments>
     </type>
-    <type name="AlbertMage\PageBuilder\Model\Parser\Video">
+    <type name="AlbertMage\PageBuilder\Model\Parser\ContentType\Video">
         <arguments>
             <argument name="attributes" xsi:type="array">
                 <item name="default" xsi:type="array">
                     <item name="main" xsi:type="array">
                         <item name="data-content-type" xsi:type="string"></item>
-                        <item name="1data-appearance" xsi:type="string"></item>
+                        <item name="data-appearance" xsi:type="string"></item>
+                    </item>
+                    <item name="video" xsi:type="array">
+                        <item name="frameborder" xsi:type="string"></item>
+                        <item name="controls" xsi:type="string"></item>
+                        <item name="src" xsi:type="string"></item>
+                        <item name="poster" xsi:type="string"></item>
+                        <item name="data-video-type" xsi:type="string"></item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Parser\ContentType\Image">
+        <arguments>
+            <argument name="attributes" xsi:type="array">
+                <item name="default" xsi:type="array">
+                    <item name="main" xsi:type="array">
+                        <item name="data-content-type" xsi:type="string"></item>
+                        <item name="data-appearance" xsi:type="string"></item>
                     </item>
                     <item name="video" xsi:type="array">
                         <item name="frameborder" xsi:type="string"></item>

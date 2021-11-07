@@ -4,7 +4,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace AlbertMage\PageBuilder\Model\Parser;
+namespace AlbertMage\PageBuilder\Model\Parser\ContentType;
 
 /**
  *
