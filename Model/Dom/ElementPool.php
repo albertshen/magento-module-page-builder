@@ -4,10 +4,9 @@
  * See COPYING.txt for license details.
  */
 
-namespace AlbertMage\PageBuilder\Model;
+namespace AlbertMage\PageBuilder\Model\Dom;
 
 use Magento\Framework\App\ObjectManager;
-use AlbertMage\PageBuilder\Api\ParserInterface;
 
 /**
  * Class aggregate all Media Gallery Entry Converters
@@ -15,38 +14,38 @@ use AlbertMage\PageBuilder\Api\ParserInterface;
  * @api
  * @since 100.0.2
  */
-class ParserPool
+class ElementPool
 {
     /**
-     * @var string
+     * @var array
      */
-    private $parserClassCollection;
+    private $elementClassCollection;
 
     /**
      * @param array
      */
-    public function __construct(array $parserClassCollection)
+    public function __construct(array $elementClassCollection)
     {
-        $this->parserClassCollection = $parserClassCollection;
+        $this->elementClassCollection = $elementClassCollection;
     }
 
     /**
      * Get specific parser class by given content type
      *
      * @param string $contentType
-     * @return ParserInterface
+     * @return ElementInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function create($contentType)
     {
-        if (isset($this->parserClassCollection[$contentType])) {
-            $parser = ObjectManager::getInstance()->create($this->parserClassCollection[$contentType]);
-            if (!$parser instanceof ParserInterface) {
+        if (isset($this->elementClassCollection[$contentType])) {
+            $element = ObjectManager::getInstance()->create($this->elementClassCollection[$contentType]);
+            if (!$element instanceof ElementInterface) {
                 throw new \InvalidArgumentException(
-                    __('Dom parser should be an instance of ParserInterface.')
+                    __('Dom parser should be an instance of ElementInterface.')
                 );
             }
-            return $parser;
+            return $element;
         }
 
         throw new \Magento\Framework\Exception\LocalizedException(

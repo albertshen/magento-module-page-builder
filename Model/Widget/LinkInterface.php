@@ -4,15 +4,22 @@
  * See COPYING.txt for license details.
  */
 
-namespace AlbertMage\PageBuilder\Api;
+namespace AlbertMage\PageBuilder\Model\Widget;
 
-interface LinkProviderInterface
+interface LinkInterface
 {
+
+    /**
+     * 
+     */
+    const LINK_TYPE = 'link';
+
     /**
      * Generaget link or path for different app
      *
-     * @return string
+     * @return array
      * @throws LocalizedException
      */
-    public function generate($string) : string;
+    public function getLink() : array;
+
 }

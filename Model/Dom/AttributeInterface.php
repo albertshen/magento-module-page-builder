@@ -4,9 +4,12 @@
  * See COPYING.txt for license details.
  */
 
-namespace AlbertMage\PageBuilder\Api;
+namespace AlbertMage\PageBuilder\Model\Dom;
 
-interface AttributeParserInterface
+/**
+ *
+ */
+interface AttributeInterface
 {
     /**
      * Parse Directive

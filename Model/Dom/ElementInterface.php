@@ -4,9 +4,9 @@
  * See COPYING.txt for license details.
  */
 
-namespace AlbertMage\PageBuilder\Api;
+namespace AlbertMage\PageBuilder\Model\Dom;
 
-interface ParserInterface
+interface ElementInterface
 {
     /**
      * Parse Dom
@@ -14,5 +14,5 @@ interface ParserInterface
      * @return array
      * @throws LocalizedException
      */
-    public function parse($domElement) : array;
+    public function parse(\DOMElement $domElement) : array;
 }

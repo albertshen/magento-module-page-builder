@@ -3,30 +3,32 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace AlbertMage\PageBuilder\Model\Parser;
+namespace AlbertMage\PageBuilder\Model;
 
 use Symfony\Component\DomCrawler\Crawler;
+use Magento\Cms\Model\Template\Filter;
+use Magento\Framework\App\ObjectManager;
 
 /**
  * @api
  * @since 100.0.2
  */
-class Root
+class Dom
 {
 
     /**
-     * @var \AlbertMage\PageBuilder\Model\ParserPool
+     * @var \AlbertMage\PageBuilder\Model\Dom\ElementPool
      */
-    private $parserPool;
+    private $elementPool;
 
     /**
-     * @param \AlbertMage\PageBuilder\Model\ParserPool
+     * @param \AlbertMage\PageBuilder\Model\Dom\ElementPool
      */
     public function __construct(
-        \AlbertMage\PageBuilder\Model\ParserPool $parserPool
+        \AlbertMage\PageBuilder\Model\Dom\ElementPool $elementPool
     )
     {
-        $this->parserPool = $parserPool;
+        $this->elementPool = $elementPool;
     }
 
     /**
@@ -37,6 +39,7 @@ class Root
      */
     public function parse($content): array
     {
+        
         $crawler = new Crawler($content);
 
         $crawler = $crawler->filter('body > div');
@@ -45,7 +48,7 @@ class Root
 
         foreach ($crawler as $domElement) {
             $contentType = $domElement->getAttribute('data-content-type');
-            $domArray = $this->parserPool->create($contentType)->parse($domElement);
+            $domArray = $this->elementPool->create($contentType)->parse($domElement);
             $data[] = $domArray;
         }
 

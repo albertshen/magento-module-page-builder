@@ -4,19 +4,19 @@
  * See COPYING.txt for license details.
  */
 
-namespace AlbertMage\PageBuilder\Model;
+namespace AlbertMage\PageBuilder\Model\Widget;
 
-use AlbertMage\PageBuilder\Model\LinkProviderInterface;
+use AlbertMage\PageBuilder\Model\Widget\Product\ProductListProviderInterface;
 use Magento\Framework\App\ObjectManager;
 
 /**
  *
  */
-class Link implements LinkInterface
+class ProductList implements ProductListInterface
 {
 
     /**
-     * @var LinkProviderInterface
+     * @var ProductListProviderInterface
      */
     private $provider;
 
@@ -36,31 +36,26 @@ class Link implements LinkInterface
     {
         $this->_storeManager = $storeManager;
         $storeCode = $storeManager->getStore()->getCode();
-
         if (isset($providers[$storeCode])) {
             $provider = ObjectManager::getInstance()->get($providers[$storeCode]);
-            if (!$provider instanceof LinkProviderInterface) {
+            if (!$provider instanceof ProductListProviderInterface) {
                 throw new \InvalidArgumentException(
-                    __('Link should be an instance of LinkProviderInterface.')
+                    __('Provider should be an instance of ProductListProviderInterface.')
                 );
             }
             $this->provider = $provider;
         } else {
-            throw new \Magento\Framework\Exception\LocalizedException(
-                __('There is no LinkProvider for given type')
-            );
+            $this->provider = ObjectManager::getInstance()->get($providers['default']);
         }
 
     }
 
     /**
-     * Generate link or path for diferent store
-     * @param $id
-     * @param $entiyType
-     * @return string
+     * Get product list
+     * @return array
      */
-    public function generate($id, $entityType): string
+    public function getProductList() : array
     {
-        return $this->provider->generate($id, $entityType, $this->_storeManager->getStore());
+        return $this->provider->getProductList();
     }
 }
