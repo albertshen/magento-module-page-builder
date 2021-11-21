@@ -17,7 +17,7 @@ class PageLink extends AbstractLink
     public function getLink() : array
     {
         $data = [];
-        $data['type_name'] = 'link';
+        $data['type'] = 'link';
         if ($this->hasData('page_id')) {
             $data['url'] = $this->link->generate($this->getData('page_id'), 'page');
         }

@@ -37,11 +37,29 @@ class Mobile implements \AlbertMage\PageBuilder\Model\ResourceProviderInterface
      */
     public function process($resources)
     {
-        if (!empty($resources['mobile_image'])) {
-            return $this->filter->filter($resources['mobile_image']);
+        if (isset($resources['mobile_image'])) {
+            if (is_string($resources['mobile_image'])) {
+                return $this->filter->filter($resources['mobile_image']);
+            }
+            if (is_array($resources['mobile_image'])) {
+                return [
+                    'src' => $this->filter->filter($resources['mobile_image']['src']),
+                    'title' => $resources['mobile_image']['title'],
+                    'alt' => $resources['mobile_image']['alt']
+                ];
+            }
         }
-        if (!empty($resources['desktop_image'])) {
-            return $this->filter->filter($resources['desktop_image']);
+        if (isset($resources['desktop_image'])) {
+            if (is_string($resources['desktop_image'])) {
+                return $this->filter->filter($resources['desktop_image']);
+            }
+            if (is_array($resources['desktop_image'])) {
+                return [
+                    'src' => $this->filter->filter($resources['desktop_image']['src']),
+                    'title' => $resources['desktop_image']['title'],
+                    'alt' => $resources['desktop_image']['alt']
+                ];
+            }
         }
     }
 

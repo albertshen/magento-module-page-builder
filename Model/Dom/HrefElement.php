@@ -41,8 +41,13 @@ class HrefElement
             'target' => $domElement->getAttribute('target'),
             'title' => $domElement->getAttribute('title')
         ];
-        $data = array_merge($data, $this->filter->filter($domElement->getAttribute('href')));
-        unset($data['type_name']);
+        $href = $domElement->getAttribute('href');
+        if (strpos($href, 'http') === 0) {
+            $data['url'] = $href;
+        } else {
+            $data = array_merge($data, $this->filter->filter($domElement->getAttribute('href')));
+        }
+        unset($data['type']);
         return $data;
     }
 

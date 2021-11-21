@@ -25,8 +25,12 @@ class DefaultProductProvider extends AbstractProduct
    {
       $block = $this->createCollection();
       $data = [];
+      $data['type'] = 'products';
       foreach ($block->getItems() as $item) {
-         $data[] = ['sku' => $item->getSku(), 'url' => $item->getProductUrl()];
+         $data['items'][] = [
+            'sku' => $item->getSku(),
+            'url' => $this->link->generate($item->getId(), 'product')
+         ];
       }
       return $data;
    }

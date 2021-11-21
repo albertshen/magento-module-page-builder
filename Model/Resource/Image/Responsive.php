@@ -38,8 +38,17 @@ class Responsive implements \AlbertMage\PageBuilder\Model\ResourceProviderInterf
     public function process($resources)
     {
         $data = [];
-        foreach ($resources as $key => $widget) {
-            $data[$key] = $this->filter->filter($widget);
+        foreach ($resources as $key => $value) {
+            if (is_string($value)) { // For Background Image
+                $data[$key] = $this->filter->filter($value);
+            }
+            if (is_array($value)) { // For Image
+                $data[$key] = [
+                    'src' => $this->filter->filter($value['src']),
+                    'title' => $value['title'],
+                    'alt' => $value['alt']
+                ];
+            }
         }
         return $data;
     }

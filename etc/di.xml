@@ -6,6 +6,8 @@
             <argument name="elementClassCollection" xsi:type="array">
                 <item name="row" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Row</item>
                 <item name="column" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Column</item>
+                <item name="slider" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Slider</item>
+                <item name="slide" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Slide</item>
                 <item name="video" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Video</item>
                 <item name="image" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Image</item>
                 <item name="products" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Products</item>
@@ -65,9 +67,19 @@
             </argument>
         </arguments>
     </virtualType>
+    <virtualType name="AlbertMage\PageBuilder\Model\ProductLink" type="AlbertMage\PageBuilder\Model\Link">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="default" xsi:type="string">AlbertMage\PageBuilder\Model\Default\LinkProvider</item>
+                <item name="wxapp" xsi:type="string">AlbertMage\PageBuilder\Model\Wxapp\LinkProvider</item>
+            </argument>
+        </arguments>
+    </virtualType>
     <type name="AlbertMage\PageBuilder\Model\Widget\Link\ProductLink">
         <arguments>
-            <argument name="link" xsi:type="object">AlbertMage\PageBuilder\Model\WidgetLink</argument>
+            <argument name="link" xsi:type="object">
+                AlbertMage\PageBuilder\Model\WidgetLink
+            </argument>
         </arguments>
     </type>
     <type name="AlbertMage\PageBuilder\Model\Widget\Link\CategoryLink">
@@ -79,7 +91,16 @@
     </type>
     <type name="AlbertMage\PageBuilder\Model\Widget\Link\PageLink">
         <arguments>
-            <argument name="link" xsi:type="object">AlbertMage\PageBuilder\Model\WidgetLink</argument>
+            <argument name="link" xsi:type="object">
+                AlbertMage\PageBuilder\Model\WidgetLink
+            </argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Widget\Product\DefaultProductProvider">
+        <arguments>
+            <argument name="link" xsi:type="object">
+                AlbertMage\PageBuilder\Model\ProductLink
+            </argument>
         </arguments>
     </type>
     <virtualType name="AlbertMage\PageBuilder\Model\ImageResource" type="AlbertMage\PageBuilder\Model\Resource">
@@ -91,6 +112,11 @@
         </arguments>
     </virtualType>
     <type name="AlbertMage\PageBuilder\Model\Dom\Attribute\BackgroundImage">
+        <arguments>
+            <argument name="resource" xsi:type="object">AlbertMage\PageBuilder\Model\ImageResource</argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Dom\ContentType\Image">
         <arguments>
             <argument name="resource" xsi:type="object">AlbertMage\PageBuilder\Model\ImageResource</argument>
         </arguments>
@@ -134,6 +160,57 @@
                         <item name="data-video-play-only-visible" xsi:type="array"></item>
                         <item name="data-video-lazy-load" xsi:type="array"></item>
                         <item name="data-video-fallback-src" xsi:type="array"></item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Dom\ContentType\Slider">
+        <arguments>
+            <argument name="attributes" xsi:type="array">
+                <item name="default" xsi:type="array">
+                    <item name="main" xsi:type="array">
+                        <item name="data-content-type" xsi:type="array"></item>
+                        <item name="data-appearance" xsi:type="array"></item>
+                        <item name="data-autoplay" xsi:type="array"></item>
+                        <item name="data-autoplay-speed" xsi:type="array"></item>
+                        <item name="data-fade" xsi:type="array"></item>
+                        <item name="data-infinite-loop" xsi:type="array"></item>
+                        <item name="data-show-arrows" xsi:type="array"></item>
+                        <item name="data-show-dots" xsi:type="array"></item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Dom\ContentType\Slide">
+        <arguments>
+            <argument name="attributes" xsi:type="array">
+                <item name="default" xsi:type="array">
+                    <item name="main" xsi:type="array">
+                        <item name="data-content-type" xsi:type="array"></item>
+                        <item name="data-appearance" xsi:type="array"></item>
+                        <item name="data-slide-name" xsi:type="array"></item>
+                        <item name="data-show-button" xsi:type="array"></item>
+                        <item name="data-show-overlay" xsi:type="array"></item>
+                    </item>
+                    <item name="wrapper" xsi:type="array">
+                        <item name="data-background-images" xsi:type="array">
+                            <item name="parser" xsi:type="object">
+                                AlbertMage\PageBuilder\Model\Dom\Attribute\BackgroundImage
+                            </item>
+                        </item>
+                        <item name="data-background-type" xsi:type="array"></item>
+                        <item name="data-video-src" xsi:type="array">
+                            <item name="parser" xsi:type="object">
+                                AlbertMage\PageBuilder\Model\Dom\Attribute\Media
+                            </item>
+                        </item>
+                        <item name="data-video-loop" xsi:type="array"></item>
+                        <item name="data-video-play-only-visible" xsi:type="array"></item>
+                        <item name="data-video-lazy-load" xsi:type="array"></item>
+                        <item name="data-video-fallback-src" xsi:type="array"></item>
+                        <item name="data-video-type" xsi:type="array"></item>
                     </item>
                 </item>
             </argument>

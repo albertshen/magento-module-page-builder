@@ -85,6 +85,47 @@ class Filter
         return $results;
     }
 
+    /**
+     * Filter the string as array data.
+     *
+     * @param string $value
+     * @return array
+     * @throws \Exception
+     */
+    public function contentFilter($value)
+    {
+
+        $data = [];
+        if (preg_match_all(self::CONSTRUCTION_PATTERN, $value, $constructions, PREG_SET_ORDER)) {
+            $replace = [];
+            foreach ($constructions as $construction) {
+                $replace[] = $construction[0];
+            }
+            $str = str_replace($replace, ',,', $value);
+            $arr = explode(',', $str);
+            foreach ($arr as $item) {
+                if ($item) {
+                    $data[] = [
+                        'type' => 'text',
+                        'content' => $item
+                    ];
+                } else {
+                    $construction = array_shift($constructions);
+                    if ($construction) {
+                        $data[] = $this->{$construction[1].'Directive'}($construction);
+                    }
+                }
+            }
+            return $data;
+        } else {
+            $data[] = [
+                'type' => 'text',
+                'content' => $value
+            ];
+            return $data;
+        }
+
+    }
 
     /**
      * Generate widget

@@ -79,17 +79,29 @@ class Element implements ElementInterface
             }
         }
 
-        foreach ($domElement->childNodes as $node) {
-            if ($node instanceof \DOMText) {
-                $filter = \Magento\Framework\App\ObjectManager::getInstance()->get(\AlbertMage\PageBuilder\Model\Directive\Filter::class);
-                $data['items'] = $filter->filter($node->wholeText);
-                return $data;
+        // Process text element
+        if (count($domElement->childNodes) === 1 && $domElement->childNodes[0] instanceof \DOMText) {
+            $filter = \Magento\Framework\App\ObjectManager::getInstance()->get(\AlbertMage\PageBuilder\Model\Directive\Filter::class);
+            if ($domElement->getAttribute('data-content-type') === 'products') {
+                $products = $filter->filter($domElement->childNodes[0]->wholeText);
+                $data['items'] = $products['items'];
+            } else {
+                $data[$domElement->getAttribute('data-element')] = $filter->filter($domElement->childNodes[0]->wholeText);
             }
+            return $data;
+        }
+
+        // Core processor
+        foreach ($domElement->childNodes as $node) {
             if ($node->getAttribute('data-element') === 'main') {
                 $contentType = $node->getAttribute('data-content-type');
                 $data['items'][] = $this->elementPool->create($contentType)->parse($node);
             } else {
-                $data = array_merge($data, $this->doParse($node));
+                if ($node->getAttribute('data-element') === 'content') {
+                    $data[$this->getFieldName('content')] = $this->contentFilter($node->childNodes);
+                } else {
+                    $data = array_merge($data, $this->doParse($node));
+                }
             }
         }
 
@@ -105,6 +117,28 @@ class Element implements ElementInterface
                 $data[$fieldName] = $setting['parser']->parse($domElement->getAttribute($attribute));
             } else {
                 $data[$fieldName] = $domElement->getAttribute($attribute);
+            }
+        }
+        return $data;
+    }
+
+    private function contentFilter($childNodes)
+    {
+        $data = [];
+        $filter = \Magento\Framework\App\ObjectManager::getInstance()->get(\AlbertMage\PageBuilder\Model\Directive\Filter::class);
+        foreach ($childNodes as $childNode) {
+            if ($childNode instanceof \DOMText) {
+                $data = array_merge($data, $filter->contentFilter($childNode->wholeText));
+            } else {
+                if ($childNode->tagName === 'img') {
+                    array_push($data, [
+                        'type' => 'image',
+                        'image' => [
+                            'src' => $filter->filter($childNode->getAttribute('src')),
+                            'alt' => $childNode->getAttribute('alt')
+                        ]
+                    ]);
+                } 
             }
         }
         return $data;

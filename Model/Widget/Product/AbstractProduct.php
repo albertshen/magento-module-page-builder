@@ -83,6 +83,11 @@ abstract class AbstractProduct extends \Magento\Framework\DataObject implements 
     protected $_storeManager;
 
     /**
+     * @var \AlbertMage\PageBuilder\Model\LinkInterface
+     */
+    protected $link;
+
+    /**
      * @param CollectionFactory $productCollectionFactory
      * @param Visibility $catalogProductVisibility
      * @param SqlBuilder $sqlBuilder
@@ -106,7 +111,8 @@ abstract class AbstractProduct extends \Magento\Framework\DataObject implements 
         CategoryRepositoryInterface $categoryRepository = null,
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Catalog\Model\Config $catalogConfig
+        \Magento\Catalog\Model\Config $catalogConfig,
+        \AlbertMage\PageBuilder\Model\LinkInterface $link
     ) {
         $this->productCollectionFactory = $productCollectionFactory;
         $this->catalogProductVisibility = $catalogProductVisibility;
@@ -118,6 +124,7 @@ abstract class AbstractProduct extends \Magento\Framework\DataObject implements 
         $this->_request = $request;
         $this->_storeManager = $storeManager;
         $this->_catalogConfig = $catalogConfig;
+        $this->link = $link;
         parent::__construct(
             $params
         );
