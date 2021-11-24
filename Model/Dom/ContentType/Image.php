@@ -51,11 +51,11 @@ class Image extends \AlbertMage\PageBuilder\Model\Dom\Element
         $data = [];
         $data[$this->getFieldName('data-content-type')] = $domElement->getAttribute('data-content-type');
         $data[$this->getFieldName('data-appearance')] = $domElement->getAttribute('data-appearance');
-        if ($domElement->childNodes[0]->tagName === 'a') {
-            $data['link'] = $this->hrefElement->parse($domElement->childNodes[0]);
-            $childNodes = $domElement->childNodes[0]->childNodes;
+        if ($domElement->firstChild->tagName === 'a') {
+            $data['link'] = $this->hrefElement->parse($domElement->firstChild);
+            $childNodes = $domElement->firstChild->childNodes;
         } else {
-            $childNodes = $domElement->childNodes->childNodes;
+            $childNodes = $domElement->childNodes;
         }
 
         $images = [];

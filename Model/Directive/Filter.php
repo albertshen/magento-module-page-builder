@@ -33,11 +33,6 @@ class Filter
     protected $_storeManager;
 
     /**
-     * @var \Magento\Cms\Model\BlockFactory
-     */
-    protected $_blockFactory;
-
-    /**
      * @var array
      */
     protected $widgetMetaData;
@@ -45,17 +40,14 @@ class Filter
     /**
      * @param \Magento\Framework\Filter\VariableResolverInterface|null $variableResolver
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Cms\Model\BlockFactory $blockFactory
      */
     public function __construct(
         \Magento\Framework\Filter\VariableResolverInterface $variableResolver = null,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Cms\Model\BlockFactory $blockFactory,
         array $widgetMetaData
     ) {
         $this->variableResolver = $variableResolver ?? ObjectManager::getInstance()->get(\Magento\Framework\Filter\VariableResolverInterface::class);
         $this->_storeManager = $storeManager;
-        $this->_blockFactory = $blockFactory;
         $this->widgetMetaData = $widgetMetaData;
     }
 
@@ -164,6 +156,8 @@ class Filter
 
         $params['type'] = $this->getWidgetMetaData($params['type']);
 
+        $params['store_id'] = $this->_storeManager->getStore()->getId();
+
         $widget = ObjectManager::getInstance()->create($params['type'], ['params' => $params]);
 
         if ($widget instanceof \AlbertMage\PageBuilder\Model\Widget\LinkInterface) {
@@ -176,14 +170,19 @@ class Filter
             return $widget->getProductList();
         }
         
-        // if ($widget instanceof \AlbertMage\Cms\Block\CmsBlockInterface) {
-        //     $block = $this->_blockFactory->create();
-        //     $block->setStoreId($params['store_id'])->load($params['block_id']);
-        //     if ($widget->getData('component')) {
-        //         return array_merge(['component' => $widget->getData('component')], ['items' => $this->filter($block->getContent())]);
-        //     }
-        //     return $this->filter($block->getContent());
-        // }
+        if ($widget instanceof \AlbertMage\PageBuilder\Model\Widget\BlockInterface) {
+            return $widget->getBlock($this);
+            // $block = $this->_blockFactory->create();
+            // $block->setStoreId($this->_storeManager->getStore()->getId())->load($params['block_id']);
+            // $type = $params['type_name'];
+            // // if ($widget->getData('component')) {
+            // //     return array_merge(['component' => $widget->getData('component')], ['items' => $this->filter($block->getContent())]);
+            // // }
+            // return [
+            //     'type' => $type,
+            //     'block' => $this->filter($block->getContent())
+            // ];
+        }
         // // // define widget block andcheck the type is instance of Widget Interface
         // if (!$widget instanceof \AlbertMage\Cms\Block\BlockInterface) {
         //     return [];

@@ -5,11 +5,21 @@
         <arguments>
             <argument name="elementClassCollection" xsi:type="array">
                 <item name="row" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Row</item>
+                <item name="column-group" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\ColumnGroup</item>
                 <item name="column" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Column</item>
+                <item name="tabs" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Tabs</item>
+                <item name="tab-item" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\TabItem</item>
+                <item name="text" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Text</item>
+                <item name="heading" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Heading</item>
+                <item name="divider" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Divider</item>
+                <item name="buttons" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Buttons</item>
+                <item name="button-item" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\ButtonItem</item>
+                <item name="image" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Image</item>
+                <item name="video" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Video</item>
                 <item name="slider" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Slider</item>
                 <item name="slide" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Slide</item>
-                <item name="video" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Video</item>
-                <item name="image" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Image</item>
+                <item name="banner" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Banner</item>
+                <item name="block" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Block</item>
                 <item name="products" xsi:type="string">AlbertMage\PageBuilder\Model\Dom\ContentType\Products</item>
             </argument>
         </arguments>
@@ -34,6 +44,9 @@
                 </item>
                 <item name="Magento\Cms\Block\Widget\Page\Link" xsi:type="string">
                     AlbertMage\PageBuilder\Model\Widget\Link\PageLink
+                </item>
+                <item name="Magento\Cms\Block\Widget\Block" xsi:type="string">
+                    AlbertMage\PageBuilder\Model\Widget\Block
                 </item>
                 <item name="Magento\CatalogWidget\Block\Product\ProductsList" xsi:type="string">
                     AlbertMage\PageBuilder\Model\Widget\ProductList
@@ -126,40 +139,129 @@
             <argument name="attributes" xsi:type="array">
                 <item name="contained" xsi:type="array">
                     <item name="main" xsi:type="array">
-                        <item name="data-content-type" xsi:type="array"></item>
-                        <item name="data-appearance" xsi:type="array"></item>
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
+                        </item>
                     </item>
                     <item name="inner" xsi:type="array">
-                        <item name="data-enable-parallax" xsi:type="array"></item>
-                        <item name="data-parallax-speed" xsi:type="array"></item>
-                        <item name="data-video-type" xsi:type="array"></item>
-                        <item name="data-background-type" xsi:type="array"></item>
-                        <item name="data-background-images" xsi:type="array">
-                            <item name="parser" xsi:type="object">
-                                AlbertMage\PageBuilder\Model\Dom\Attribute\BackgroundImage
+                        <item name="fields" xsi:type="array">
+                            <item name="data-enable-parallax" xsi:type="array"></item>
+                            <item name="data-parallax-speed" xsi:type="array"></item>
+                            <item name="data-video-type" xsi:type="array"></item>
+                            <item name="data-background-type" xsi:type="array"></item>
+                            <item name="data-background-images" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\BackgroundImage
+                                </item>
                             </item>
+                            <item name="data-video-src" xsi:type="array"></item>
+                            <item name="data-video-loop" xsi:type="array"></item>
+                            <item name="data-video-play-only-visible" xsi:type="array"></item>
+                            <item name="data-video-lazy-load" xsi:type="array"></item>
+                            <item name="data-video-fallback-src" xsi:type="array"></item>
                         </item>
-                        <item name="data-video-src" xsi:type="array"></item>
-                        <item name="data-video-loop" xsi:type="array"></item>
-                        <item name="data-video-play-only-visible" xsi:type="array"></item>
-                        <item name="data-video-lazy-load" xsi:type="array"></item>
-                        <item name="data-video-fallback-src" xsi:type="array"></item>
                     </item>
                 </item>
                 <item name="default" xsi:type="array">
                     <item name="main" xsi:type="array">
-                        <item name="data-content-type" xsi:type="array"></item>
-                        <item name="1data-appearance" xsi:type="array"></item>
-                        <item name="data-enable-parallax" xsi:type="array"></item>
-                        <item name="data-parallax-speed" xsi:type="array"></item>
-                        <item name="data-video-type" xsi:type="array"></item>
-                        <item name="data-background-type" xsi:type="array"></item>
-                        <item name="data-background-images" xsi:type="array"></item>
-                        <item name="data-video-src" xsi:type="array"></item>
-                        <item name="data-video-loop" xsi:type="array"></item>
-                        <item name="data-video-play-only-visible" xsi:type="array"></item>
-                        <item name="data-video-lazy-load" xsi:type="array"></item>
-                        <item name="data-video-fallback-src" xsi:type="array"></item>
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="1data-appearance" xsi:type="array"></item>
+                            <item name="data-enable-parallax" xsi:type="array"></item>
+                            <item name="data-parallax-speed" xsi:type="array"></item>
+                            <item name="data-video-type" xsi:type="array"></item>
+                            <item name="data-background-type" xsi:type="array"></item>
+                            <item name="data-background-images" xsi:type="array"></item>
+                            <item name="data-video-src" xsi:type="array"></item>
+                            <item name="data-video-loop" xsi:type="array"></item>
+                            <item name="data-video-play-only-visible" xsi:type="array"></item>
+                            <item name="data-video-lazy-load" xsi:type="array"></item>
+                            <item name="data-video-fallback-src" xsi:type="array"></item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Dom\ContentType\ColumnGroup">
+        <arguments>
+            <argument name="attributes" xsi:type="array">
+                <item name="default" xsi:type="array">
+                    <item name="main" xsi:type="array">
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
+                            <item name="data-grid-size" xsi:type="array"></item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Dom\ContentType\Column">
+        <arguments>
+            <argument name="attributes" xsi:type="array">
+                <item name="default" xsi:type="array">
+                    <item name="main" xsi:type="array">
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
+                            <item name="data-background-images" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\BackgroundImage
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Dom\ContentType\TabItem">
+        <arguments>
+            <argument name="attributes" xsi:type="array">
+                <item name="default" xsi:type="array">
+                    <item name="main" xsi:type="array">
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
+                            <item name="data-tab-name" xsi:type="array"></item>
+                            <item name="data-background-images" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\BackgroundImage
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Dom\ContentType\Buttons">
+        <arguments>
+            <argument name="attributes" xsi:type="array">
+                <item name="default" xsi:type="array">
+                    <item name="main" xsi:type="array">
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
+                            <item name="data-same-width" xsi:type="array"></item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Dom\ContentType\ButtonItem">
+        <arguments>
+            <argument name="attributes" xsi:type="array">
+                <item name="default" xsi:type="array">
+                    <item name="main" xsi:type="array">
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
+                        </item>
                     </item>
                 </item>
             </argument>
@@ -170,14 +272,16 @@
             <argument name="attributes" xsi:type="array">
                 <item name="default" xsi:type="array">
                     <item name="main" xsi:type="array">
-                        <item name="data-content-type" xsi:type="array"></item>
-                        <item name="data-appearance" xsi:type="array"></item>
-                        <item name="data-autoplay" xsi:type="array"></item>
-                        <item name="data-autoplay-speed" xsi:type="array"></item>
-                        <item name="data-fade" xsi:type="array"></item>
-                        <item name="data-infinite-loop" xsi:type="array"></item>
-                        <item name="data-show-arrows" xsi:type="array"></item>
-                        <item name="data-show-dots" xsi:type="array"></item>
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
+                            <item name="data-autoplay" xsi:type="array"></item>
+                            <item name="data-autoplay-speed" xsi:type="array"></item>
+                            <item name="data-fade" xsi:type="array"></item>
+                            <item name="data-infinite-loop" xsi:type="array"></item>
+                            <item name="data-show-arrows" xsi:type="array"></item>
+                            <item name="data-show-dots" xsi:type="array"></item>
+                        </item>
                     </item>
                 </item>
             </argument>
@@ -188,29 +292,33 @@
             <argument name="attributes" xsi:type="array">
                 <item name="default" xsi:type="array">
                     <item name="main" xsi:type="array">
-                        <item name="data-content-type" xsi:type="array"></item>
-                        <item name="data-appearance" xsi:type="array"></item>
-                        <item name="data-slide-name" xsi:type="array"></item>
-                        <item name="data-show-button" xsi:type="array"></item>
-                        <item name="data-show-overlay" xsi:type="array"></item>
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
+                            <item name="data-slide-name" xsi:type="array"></item>
+                            <item name="data-show-button" xsi:type="array"></item>
+                            <item name="data-show-overlay" xsi:type="array"></item>
+                        </item>
                     </item>
                     <item name="wrapper" xsi:type="array">
-                        <item name="data-background-images" xsi:type="array">
-                            <item name="parser" xsi:type="object">
-                                AlbertMage\PageBuilder\Model\Dom\Attribute\BackgroundImage
+                        <item name="fields" xsi:type="array">
+                            <item name="data-background-images" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\BackgroundImage
+                                </item>
                             </item>
-                        </item>
-                        <item name="data-background-type" xsi:type="array"></item>
-                        <item name="data-video-src" xsi:type="array">
-                            <item name="parser" xsi:type="object">
-                                AlbertMage\PageBuilder\Model\Dom\Attribute\Media
+                            <item name="data-background-type" xsi:type="array"></item>
+                            <item name="data-video-src" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Media
+                                </item>
                             </item>
+                            <item name="data-video-loop" xsi:type="array"></item>
+                            <item name="data-video-play-only-visible" xsi:type="array"></item>
+                            <item name="data-video-lazy-load" xsi:type="array"></item>
+                            <item name="data-video-fallback-src" xsi:type="array"></item>
+                            <item name="data-video-type" xsi:type="array"></item>
                         </item>
-                        <item name="data-video-loop" xsi:type="array"></item>
-                        <item name="data-video-play-only-visible" xsi:type="array"></item>
-                        <item name="data-video-lazy-load" xsi:type="array"></item>
-                        <item name="data-video-fallback-src" xsi:type="array"></item>
-                        <item name="data-video-type" xsi:type="array"></item>
                     </item>
                 </item>
             </argument>
@@ -221,19 +329,74 @@
             <argument name="attributes" xsi:type="array">
                 <item name="default" xsi:type="array">
                     <item name="main" xsi:type="array">
-                        <item name="data-content-type" xsi:type="array"></item>
-                        <item name="data-appearance" xsi:type="array"></item>
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
+                        </item>
                     </item>
                     <item name="video" xsi:type="array">
-                        <item name="frameborder" xsi:type="array"></item>
-                        <item name="controls" xsi:type="array"></item>
-                        <item name="src" xsi:type="array">
-                            <item name="parser" xsi:type="object">
-                                AlbertMage\PageBuilder\Model\Dom\Attribute\Media
+                        <item name="fields" xsi:type="array">
+                            <item name="frameborder" xsi:type="array"></item>
+                            <item name="controls" xsi:type="array"></item>
+                            <item name="src" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Media
+                                </item>
                             </item>
+                            <item name="poster" xsi:type="array"></item>
+                            <item name="data-video-type" xsi:type="array"></item>
                         </item>
-                        <item name="poster" xsi:type="array"></item>
-                        <item name="data-video-type" xsi:type="array"></item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Dom\ContentType\Banner">
+        <arguments>
+            <argument name="attributes" xsi:type="array">
+                <item name="default" xsi:type="array">
+                    <item name="main" xsi:type="array">
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
+                            <item name="data-show-button" xsi:type="array"></item>
+                            <item name="data-show-overlay" xsi:type="array"></item>
+                        </item>
+                    </item>
+                    <item name="wrapper" xsi:type="array">
+                        <item name="fields" xsi:type="array">
+                            <item name="data-background-images" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\BackgroundImage
+                                </item>
+                            </item>
+                            <item name="data-background-type" xsi:type="array"></item>
+                            <item name="data-video-src" xsi:type="array"></item>
+                            <item name="data-video-loop" xsi:type="array"></item>
+                            <item name="data-video-play-only-visible" xsi:type="array"></item>
+                            <item name="data-video-lazy-load" xsi:type="array"></item>
+                            <item name="data-video-fallback-src" xsi:type="array"></item>
+                            <item name="data-video-type" xsi:type="array"></item>
+                        </item>
+                    </item>
+                    <item name="overlay" xsi:type="array">
+                        <item name="fields" xsi:type="array">
+                            <item name="data-overlay-color" xsi:type="array"></item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AlbertMage\PageBuilder\Model\Dom\ContentType\Block">
+        <arguments>
+            <argument name="attributes" xsi:type="array">
+                <item name="default" xsi:type="array">
+                    <item name="main" xsi:type="array">
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
+                        </item>
                     </item>
                 </item>
             </argument>
@@ -244,15 +407,17 @@
             <argument name="attributes" xsi:type="array">
                 <item name="default" xsi:type="array">
                     <item name="main" xsi:type="array">
-                        <item name="data-content-type" xsi:type="array"></item>
-                        <item name="data-appearance" xsi:type="array"></item>
-                        <item name="data-autoplay" xsi:type="array"></item>
-                        <item name="data-autoplay-speed" xsi:type="array"></item>
-                        <item name="data-infinite-loop" xsi:type="array"></item>
-                        <item name="data-show-arrows" xsi:type="array"></item>
-                        <item name="data-show-dots" xsi:type="array"></item>
-                        <item name="data-carousel-mode" xsi:type="array"></item>
-                        <item name="data-center-padding" xsi:type="array"></item>
+                        <item name="fields" xsi:type="array">
+                            <item name="data-content-type" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
+                            <item name="data-autoplay" xsi:type="array"></item>
+                            <item name="data-autoplay-speed" xsi:type="array"></item>
+                            <item name="data-infinite-loop" xsi:type="array"></item>
+                            <item name="data-show-arrows" xsi:type="array"></item>
+                            <item name="data-show-dots" xsi:type="array"></item>
+                            <item name="data-carousel-mode" xsi:type="array"></item>
+                            <item name="data-center-padding" xsi:type="array"></item>
+                        </item>
                     </item>
                 </item>
             </argument>
