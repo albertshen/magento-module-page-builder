@@ -19,13 +19,20 @@ class Block extends \Magento\Framework\DataObject implements \AlbertMage\PageBui
     protected $_blockFactory;
 
     /**
+     * @var \AlbertMage\PageBuilder\Model\Dom
+     */
+    protected $dom;
+
+    /**
      * @param \Magento\Cms\Model\BlockFactory $blockFactory
      */
     public function __construct(
         \Magento\Cms\Model\BlockFactory $blockFactory,
+        \AlbertMage\PageBuilder\Model\Dom $dom,
         array $params
     ) {
         $this->_blockFactory = $blockFactory;
+        $this->dom = $dom;
         parent::__construct(
             $params
         );
@@ -34,13 +41,13 @@ class Block extends \Magento\Framework\DataObject implements \AlbertMage\PageBui
     /**
      * 
      */ 
-    public function getBlock(\AlbertMage\PageBuilder\Model\Directive\Filter $filter): array
+    public function getBlock(): array
     {
         $block = $this->_blockFactory->create();
         $block->setStoreId($this->getData('store_id'))->load($this->getData('block_id'));
         return [
             'type' => $this->getData('type_name'),
-            'block' => $filter->filter($block->getContent())
+            'block' => $this->dom->parse($block->getContent())
         ];
     }
 }

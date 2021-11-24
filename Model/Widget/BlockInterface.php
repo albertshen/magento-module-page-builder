@@ -15,6 +15,6 @@ interface BlockInterface
      * @return array
      * @throws LocalizedException
      */
-    public function getBlock(\AlbertMage\PageBuilder\Model\Directive\Filter $filter) : array;
+    public function getBlock() : array;
 
 }

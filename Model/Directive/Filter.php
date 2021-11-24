@@ -171,7 +171,7 @@ class Filter
         }
         
         if ($widget instanceof \AlbertMage\PageBuilder\Model\Widget\BlockInterface) {
-            return $widget->getBlock($this);
+            return $widget->getBlock();
             // $block = $this->_blockFactory->create();
             // $block->setStoreId($this->_storeManager->getStore()->getId())->load($params['block_id']);
             // $type = $params['type_name'];
