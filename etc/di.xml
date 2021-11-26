@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="AlbertMage\PageBuilder\Api\PageInterface" type="AlbertMage\PageBuilder\Model\Page"/>
+    <preference for="AlbertMage\PageBuilder\Api\BlockInterface" type="AlbertMage\PageBuilder\Model\Block"/>
     <type name="AlbertMage\PageBuilder\Model\Dom\ElementPool">
         <arguments>
             <argument name="elementClassCollection" xsi:type="array">
@@ -72,50 +73,15 @@
             </argument>
         </arguments>
     </virtualType>
-    <virtualType name="AlbertMage\PageBuilder\Model\WidgetLink" type="AlbertMage\PageBuilder\Model\Link">
+    <type name="AlbertMage\PageBuilder\Model\Link">
         <arguments>
             <argument name="providers" xsi:type="array">
                 <item name="default" xsi:type="string">AlbertMage\PageBuilder\Model\Default\LinkProvider</item>
                 <item name="wxapp" xsi:type="string">AlbertMage\PageBuilder\Model\Wxapp\LinkProvider</item>
             </argument>
         </arguments>
-    </virtualType>
-    <virtualType name="AlbertMage\PageBuilder\Model\ProductLink" type="AlbertMage\PageBuilder\Model\Link">
-        <arguments>
-            <argument name="providers" xsi:type="array">
-                <item name="default" xsi:type="string">AlbertMage\PageBuilder\Model\Default\LinkProvider</item>
-                <item name="wxapp" xsi:type="string">AlbertMage\PageBuilder\Model\Wxapp\LinkProvider</item>
-            </argument>
-        </arguments>
-    </virtualType>
-    <type name="AlbertMage\PageBuilder\Model\Widget\Link\ProductLink">
-        <arguments>
-            <argument name="link" xsi:type="object">
-                AlbertMage\PageBuilder\Model\WidgetLink
-            </argument>
-        </arguments>
     </type>
-    <type name="AlbertMage\PageBuilder\Model\Widget\Link\CategoryLink">
-        <arguments>
-            <argument name="link" xsi:type="object">
-               AlbertMage\PageBuilder\Model\WidgetLink
-            </argument>
-        </arguments>
-    </type>
-    <type name="AlbertMage\PageBuilder\Model\Widget\Link\PageLink">
-        <arguments>
-            <argument name="link" xsi:type="object">
-                AlbertMage\PageBuilder\Model\WidgetLink
-            </argument>
-        </arguments>
-    </type>
-    <type name="AlbertMage\PageBuilder\Model\Widget\Product\DefaultProductProvider">
-        <arguments>
-            <argument name="link" xsi:type="object">
-                AlbertMage\PageBuilder\Model\ProductLink
-            </argument>
-        </arguments>
-    </type>
+    <preference for="AlbertMage\PageBuilder\Model\LinkInterface" type="AlbertMage\PageBuilder\Model\Link"/>
     <virtualType name="AlbertMage\PageBuilder\Model\ImageResource" type="AlbertMage\PageBuilder\Model\Resource">
         <arguments>
             <argument name="resourceClassCollection" xsi:type="array">
@@ -155,7 +121,11 @@
                                     AlbertMage\PageBuilder\Model\Dom\Attribute\BackgroundImage
                                 </item>
                             </item>
-                            <item name="data-video-src" xsi:type="array"></item>
+                            <item name="data-video-src" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\VideoSrc
+                                </item>
+                            </item>
                             <item name="data-video-loop" xsi:type="array"></item>
                             <item name="data-video-play-only-visible" xsi:type="array"></item>
                             <item name="data-video-lazy-load" xsi:type="array"></item>
@@ -173,7 +143,11 @@
                             <item name="data-video-type" xsi:type="array"></item>
                             <item name="data-background-type" xsi:type="array"></item>
                             <item name="data-background-images" xsi:type="array"></item>
-                            <item name="data-video-src" xsi:type="array"></item>
+                            <item name="data-video-src" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\VideoSrc
+                                </item>
+                            </item>
                             <item name="data-video-loop" xsi:type="array"></item>
                             <item name="data-video-play-only-visible" xsi:type="array"></item>
                             <item name="data-video-lazy-load" xsi:type="array"></item>
@@ -310,7 +284,7 @@
                             <item name="data-background-type" xsi:type="array"></item>
                             <item name="data-video-src" xsi:type="array">
                                 <item name="parser" xsi:type="string">
-                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Media
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\VideoSrc
                                 </item>
                             </item>
                             <item name="data-video-loop" xsi:type="array"></item>
@@ -371,7 +345,11 @@
                                 </item>
                             </item>
                             <item name="data-background-type" xsi:type="array"></item>
-                            <item name="data-video-src" xsi:type="array"></item>
+                            <item name="data-video-src" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\VideoSrc
+                                </item>
+                            </item>
                             <item name="data-video-loop" xsi:type="array"></item>
                             <item name="data-video-play-only-visible" xsi:type="array"></item>
                             <item name="data-video-lazy-load" xsi:type="array"></item>

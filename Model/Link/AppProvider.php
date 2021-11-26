@@ -28,7 +28,7 @@ class AppProvider implements \AlbertMage\PageBuilder\Model\LinkProviderInterface
     /**
      * @inheritDoc
      */
-    public function generate($id, $entityType, $store): string
+    public function generate($id, $entityType, \Magento\Store\Model\Store $store): string
     {
         if (isset($this->config['routePattern'][$entityType])) {
             return str_replace(':id', $id, $this->config['routePattern'][$entityType]);

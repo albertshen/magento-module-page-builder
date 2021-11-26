@@ -3,17 +3,17 @@
 namespace AlbertMage\PageBuilder\Api;
  
  
-interface PageInterface {
+interface BlockInterface {
 
 
     /**
-     * Retrieve page.
+     * Retrieve block.
      *
-     * @param int $pageId
+     * @param string $blockId
      * @return array
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getPage($pageId);
+    public function getBlock($blockId);
 
 
 }

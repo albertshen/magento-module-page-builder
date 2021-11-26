@@ -143,6 +143,11 @@ class Filter
         return $this->_storeManager->getStore()
             ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $params['url'];
     }
+
+    public function configDirective($construction)
+    {
+        return [];
+    }
     
     /**
      * General method for generate widget
@@ -172,26 +177,7 @@ class Filter
         
         if ($widget instanceof \AlbertMage\PageBuilder\Model\Widget\BlockInterface) {
             return $widget->getBlock();
-            // $block = $this->_blockFactory->create();
-            // $block->setStoreId($this->_storeManager->getStore()->getId())->load($params['block_id']);
-            // $type = $params['type_name'];
-            // // if ($widget->getData('component')) {
-            // //     return array_merge(['component' => $widget->getData('component')], ['items' => $this->filter($block->getContent())]);
-            // // }
-            // return [
-            //     'type' => $type,
-            //     'block' => $this->filter($block->getContent())
-            // ];
         }
-        // // // define widget block andcheck the type is instance of Widget Interface
-        // if (!$widget instanceof \AlbertMage\Cms\Block\BlockInterface) {
-        //     return [];
-        // }
-
-        // if ($widget->getData('component')) {
-        //     return array_merge(['component' => $widget->getData('component')], $widget->getResults());
-        // }
-        // return $widget->getResults();
     }
 
     public function getWidgetMetaData($originClass)
