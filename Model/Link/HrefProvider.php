@@ -12,13 +12,8 @@ use Magento\UrlRewrite\Model\UrlFinderInterface;
 /**
  *
  */
-class HrefProvider implements \AlbertMage\PageBuilder\Model\LinkProviderInterface
+class HrefProvider extends AbstractProvider
 {
-
-    /**
-     * @var array
-     */
-    private $config;
 
     /**
      * Url finder for category
@@ -35,43 +30,34 @@ class HrefProvider implements \AlbertMage\PageBuilder\Model\LinkProviderInterfac
         UrlFinderInterface $urlFinder
     )
     {
-        $this->config = $config;
         $this->urlFinder = $urlFinder;
-    }
-    
-    /**
-     * @inheritDoc
-     */
-    public function generate(int $id, string $entityType, \Magento\Store\Model\Store $store) : string
-    {
-        if (isset($this->config['routePattern'][$entityType])) {
-            return str_replace(':id', $id, $this->config['routePattern'][$entityType]);
-        }
-        return $this->getHref($id, $entityType, $store);
+        parent::__construct(
+            $config
+        );
     }
 
     /**
-     * Prepare url using passed id path and return it
+     * Prepare path using passed id path and return it
      *
      * @throws \RuntimeException
      * @return string|false if path was not found in url rewrites.
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
-    public function getHref($id, $entityType, $store)
+    public function getPath(int $id, string $entityType)
     {
         $entityType = $entityType === 'page' ? 'cms-page' : $entityType;
         $filterData = [
             UrlRewrite::ENTITY_ID => $id,
             UrlRewrite::ENTITY_TYPE => $entityType,
-            UrlRewrite::STORE_ID => $store->getId(),
+            UrlRewrite::STORE_ID => $this->getStore()->getId(),
         ];
 
         $rewrite = $this->urlFinder->findOneByData($filterData);
-
         if ($rewrite) {
-            $href = $store->getUrl('', ['_direct' => $rewrite->getRequestPath()]);
+            return $rewrite->getRequestPath();
         }
-        return $href;
+        return '';
     }
+
 
 }

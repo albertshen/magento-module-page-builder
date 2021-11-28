@@ -9,31 +9,17 @@ namespace AlbertMage\PageBuilder\Model\Link;
 /**
  *
  */
-class AppProvider implements \AlbertMage\PageBuilder\Model\LinkProviderInterface
+class AppProvider extends AbstractProvider
 {
 
     /**
-     * @var array
-     */
-    private $config;
-
-    /**
-     * @param array
-     */
-    public function __construct(array $config)
-    {
-        $this->config = $config;
-    }
-    
-    /**
      * @inheritDoc
      */
-    public function generate($id, $entityType, \Magento\Store\Model\Store $store): string
+    public function getPath(int $id, string $entityType)
     {
         if (isset($this->config['routePattern'][$entityType])) {
             return str_replace(':id', $id, $this->config['routePattern'][$entityType]);
         }
         return $entityType . '/' . $id;
     }
-
 }

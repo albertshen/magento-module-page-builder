@@ -21,11 +21,6 @@ class Link implements LinkInterface
     private $provider;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $_storeManager;
-
-    /**
      * @param \Magento\Store\Model\StoreManagerInterface
      * @param array
      */
@@ -34,11 +29,10 @@ class Link implements LinkInterface
         array $providers
     )
     {
-        $this->_storeManager = $storeManager;
         $storeCode = $storeManager->getStore()->getCode();
 
         if (isset($providers[$storeCode])) {
-            $provider = ObjectManager::getInstance()->get($providers[$storeCode]);
+            $provider = ObjectManager::getInstance()->get($providers[$storeCode])->setStore($storeManager->getStore());
             if (!$provider instanceof LinkProviderInterface) {
                 throw new \InvalidArgumentException(
                     __('Link should be an instance of LinkProviderInterface.')
@@ -59,8 +53,8 @@ class Link implements LinkInterface
      * @param $entiyType
      * @return string
      */
-    public function generate($id, $entityType): string
+    public function generate($id, $entityType, $params = []): string
     {
-        return $this->provider->generate($id, $entityType, $this->_storeManager->getStore());
+        return $this->provider->generate($id, $entityType, $params);
     }
 }

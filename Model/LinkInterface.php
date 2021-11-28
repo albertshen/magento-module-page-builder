@@ -14,5 +14,5 @@ interface LinkInterface
      * @return string
      * @throws LocalizedException
      */
-    public function generate($id, $entityType) : string;
+    public function generate($id, $entityType, $params = []) : string;
 }
