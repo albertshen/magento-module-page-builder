@@ -6,56 +6,38 @@
 
 namespace AlbertMage\PageBuilder\Model\Widget;
 
-use AlbertMage\PageBuilder\Model\Widget\Product\ProductListProviderInterface;
-use Magento\Framework\App\ObjectManager;
+use Magento\Framework\DataObject;
+use AlbertMage\PageBuilder\Model\Widget\Product\AbstractProduct;
 
 /**
- *
+ *  Product list
  */
-class ProductList implements ProductListInterface
+class ProductList extends AbstractProduct implements ProductListInterface
 {
 
     /**
-     * @var ProductListProviderInterface
+     * @inheritdoc
      */
-    private $provider;
-
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $_storeManager;
-
-    /**
-     * @param \Magento\Store\Model\StoreManagerInterface
-     * @param array
-     */
-    public function __construct(
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        array $providers
-    )
+    public function getProductList()
     {
-        $this->_storeManager = $storeManager;
-        $storeCode = $storeManager->getStore()->getCode();
-        if (isset($providers[$storeCode])) {
-            $provider = ObjectManager::getInstance()->get($providers[$storeCode]);
-            if (!$provider instanceof ProductListProviderInterface) {
-                throw new \InvalidArgumentException(
-                    __('Provider should be an instance of ProductListProviderInterface.')
-                );
-            }
-            $this->provider = $provider;
-        } else {
-            $this->provider = ObjectManager::getInstance()->get($providers['default']);
+        $block = $this->createCollection();
+        $data['type'] = 'products';
+        foreach ($block->getItems() as $product) {
+            $data['items'][] = $this->getProductData($product)->getData();
         }
-
+        return $data;
     }
 
     /**
-     * Get product list
-     * @return array
+     * @inheritdoc
      */
-    public function getProductList() : array
+    public function getProductData($product)
     {
-        return $this->provider->getProductList();
+        $productData = new DataObject([
+            'sku' => $product->getSku(),
+            'url' => $product->getProductUrl()
+        ]);
+
+        return $productData;
     }
 }

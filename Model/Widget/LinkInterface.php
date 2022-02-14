@@ -8,7 +8,6 @@ namespace AlbertMage\PageBuilder\Model\Widget;
 
 interface LinkInterface
 {
-
     /**
      * 
      */
@@ -22,4 +21,10 @@ interface LinkInterface
      */
     public function getLink() : array;
 
+    /**
+     * Get link data.
+     *
+     * @return \Magento\Framework\DataObject
+     */
+    public function getLinkData();
 }

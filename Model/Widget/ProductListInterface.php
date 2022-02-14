@@ -22,4 +22,11 @@ interface ProductListInterface
      * @return array
      */
     public function getProductList();
+
+    /**
+     * Get product data.
+     *
+     * @return \Magento\Framework\DataObject
+     */
+    public function getProductData($product);
 }

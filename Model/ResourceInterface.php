@@ -8,6 +8,10 @@ namespace AlbertMage\PageBuilder\Model;
 
 interface ResourceInterface
 {
+    const RESPONSIVE = 'responsive';
+
+    const MOBILE = 'mobile';
+    
     /**
      * Get specific parser class by given content type
      *

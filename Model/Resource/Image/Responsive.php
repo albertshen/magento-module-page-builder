@@ -11,7 +11,7 @@ namespace AlbertMage\PageBuilder\Model\Resource\Image;
  * @api
  * @since 100.0.2
  */
-class Responsive implements \AlbertMage\PageBuilder\Model\ResourceProviderInterface
+class Responsive implements \AlbertMage\PageBuilder\Model\ResourceInterface
 {
 
     /**

@@ -1,5 +1,5 @@
 .phpintel/
-.DS_Store
+*.DS_Store
 .git
 *.tmp
 *.lock

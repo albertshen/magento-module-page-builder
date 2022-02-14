@@ -22,20 +22,13 @@ class Resource implements ResourceInterface
     private $resourceClassCollection;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $_storeManager;
-
-    /**
      * @param \Magento\Store\Model\StoreManagerInterface
      * @param array
      */
     public function __construct(
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         array $resourceClassCollection
     )
     {
-        $this->_storeManager = $storeManager;
         $this->resourceClassCollection = $resourceClassCollection;
     }
 
@@ -44,18 +37,27 @@ class Resource implements ResourceInterface
      */
     public function process($resources)
     {
-        if (isset($this->resourceClassCollection[$this->_storeManager->getStore()->getCode()])) {
-            $parser = ObjectManager::getInstance()->get($this->resourceClassCollection[$this->_storeManager->getStore()->getCode()]);
-            if (!$parser instanceof ResourceProviderInterface) {
+        $resourceType = $this->getResouceType();
+
+        if (isset($this->resourceClassCollection[$resourceType])) {
+            $parser = ObjectManager::getInstance()->get($this->resourceClassCollection[$resourceType]);
+            if (!$parser instanceof ResourceInterface) {
                 throw new \InvalidArgumentException(
-                    __('Resource parser should be an instance of ResourceProviderInterface.')
+                    __('Resource parser should be an instance of ResourceInterface.')
                 );
             }
             return $parser->process($resources);
         }
 
         throw new \Magento\Framework\Exception\LocalizedException(
-            __('There is no store code for given code')
+            __('There is no resource type for given code')
         );
     }
+
+    public function getResouceType()
+    {
+        return self::RESPONSIVE;
+    }
+
+
 }
