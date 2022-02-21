@@ -28,5 +28,5 @@ interface ProductListInterface
      *
      * @return \Magento\Framework\DataObject
      */
-    public function getProductData($product);
+    public function getProductData(\Magento\Catalog\Model\Product $product);
 }

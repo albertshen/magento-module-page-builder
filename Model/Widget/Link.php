@@ -49,7 +49,7 @@ class Link extends \Magento\Framework\DataObject implements \AlbertMage\PageBuil
      * Get link data object
      *
      * @throws \RuntimeException
-     * @return DataObject
+     * @return \Magento\Framework\DataObject\DataObject
      */
     public function getLinkData()
     {
@@ -64,18 +64,18 @@ class Link extends \Magento\Framework\DataObject implements \AlbertMage\PageBuil
             $this->setEntityType($rewriteData[0]);
         }
 
-        $data = new DataObject([
+        $dataObject = new DataObject([
             'type' => self::LINK_TYPE,
             'url' => $this->getEntityType().'/'.$this->getEntityId()
         ]);
 
         if ($this->hasData('anchor_text')) {
-            $data->setText($this->getData('anchor_text'));
+            $dataObject->setText($this->getData('anchor_text'));
         }
         if ($this->hasData('title')) {
-            $data->setTitle($this->getData('title'));
+            $dataObject->setTitle($this->getData('title'));
         }
-        return $data;
+        return $dataObject;
     }
 
     /**

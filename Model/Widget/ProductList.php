@@ -31,13 +31,13 @@ class ProductList extends AbstractProduct implements ProductListInterface
     /**
      * @inheritdoc
      */
-    public function getProductData($product)
+    public function getProductData(\Magento\Catalog\Model\Product $product)
     {
-        $productData = new DataObject([
+        $dataObject = new DataObject([
             'sku' => $product->getSku(),
             'url' => $product->getProductUrl()
         ]);
 
-        return $productData;
+        return $dataObject;
     }
 }
