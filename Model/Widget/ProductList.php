@@ -7,7 +7,7 @@
 namespace AlbertMage\PageBuilder\Model\Widget;
 
 use Magento\Framework\DataObject;
-use AlbertMage\PageBuilder\Model\Widget\Product\AbstractProduct;
+use AlbertMage\PageBuilder\Model\Widget\AbstractProduct;
 
 /**
  *  Product list
