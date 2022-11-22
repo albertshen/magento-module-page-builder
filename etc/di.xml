@@ -25,7 +25,8 @@
             </argument>
         </arguments>
     </type>
-<!--     <type name="AlbertMage\PageBuilder\Model\Widget\ProductList">
+    <!--     
+    <type name="AlbertMage\PageBuilder\Model\Widget\ProductList">
         <arguments>
             <argument name="providers" xsi:type="array">
                 <item name="default" xsi:type="string">
@@ -33,7 +34,8 @@
                 </item>
             </argument>
         </arguments>
-    </type> -->
+    </type>
+    -->
     <type name="AlbertMage\PageBuilder\Model\Directive\Filter">
         <arguments>
             <argument name="widgetMetaData" xsi:type="array">
@@ -55,7 +57,8 @@
             </argument>
         </arguments>
     </type>
-<!--     <virtualType name="AlbertMage\PageBuilder\Model\Default\LinkProvider" type="AlbertMage\PageBuilder\Model\Link\HrefProvider">
+    <!--
+    <virtualType name="AlbertMage\PageBuilder\Model\Default\LinkProvider" type="AlbertMage\PageBuilder\Model\Link\HrefProvider">
         <arguments>
             <argument name="config" xsi:type="array">
                 <item name="absolute" xsi:type="boolean">true</item>
@@ -72,8 +75,10 @@
                 </item>
             </argument>
         </arguments>
-    </virtualType> -->
-<!--     <type name="AlbertMage\PageBuilder\Model\Link">
+    </virtualType>
+    -->
+    <!--
+    <type name="AlbertMage\PageBuilder\Model\Link">
         <arguments>
             <argument name="providers" xsi:type="array">
                 <item name="default" xsi:type="string">AlbertMage\PageBuilder\Model\Default\LinkProvider</item>
@@ -81,7 +86,8 @@
             </argument>
         </arguments>
     </type>
-    <preference for="AlbertMage\PageBuilder\Model\LinkInterface" type="AlbertMage\PageBuilder\Model\Link"/> -->
+    <preference for="AlbertMage\PageBuilder\Model\LinkInterface" type="AlbertMage\PageBuilder\Model\Link"/>
+    -->
     <virtualType name="AlbertMage\PageBuilder\Model\ImageResource" type="AlbertMage\PageBuilder\Model\Resource">
         <arguments>
             <argument name="resourceClassCollection" xsi:type="array">

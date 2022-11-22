@@ -1,18 +1,13 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright © PHPDigital, Inc. All rights reserved.
  */
-
 namespace AlbertMage\PageBuilder\Model;
 
 use Magento\Framework\App\ObjectManager;
 
 /**
- * Class aggregate all Media Gallery Entry Converters
- *
- * @api
- * @since 100.0.2
+ * @author Albert Shen <albertshen1206@gmail.com>
  */
 class Resource implements ResourceInterface
 {

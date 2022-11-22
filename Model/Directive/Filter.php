@@ -1,7 +1,6 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright © PHPDigital, Inc. All rights reserved.
  */
 namespace AlbertMage\PageBuilder\Model\Directive;
 
@@ -10,7 +9,7 @@ use Magento\Framework\UrlInterface;
 
 /**
  * Template Filter Model
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @author Albert Shen <albertshen1206@gmail.com>
  */
 class Filter
 {

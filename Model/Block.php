@@ -1,7 +1,12 @@
 <?php 
-	
+/**
+ * Copyright © PHPDigital, Inc. All rights reserved.
+ */
 namespace AlbertMage\PageBuilder\Model;
 
+/**
+ * @author Albert Shen <albertshen1206@gmail.com>
+ */
 class Block implements \AlbertMage\PageBuilder\Api\BlockInterface
 {
 
@@ -29,7 +34,6 @@ class Block implements \AlbertMage\PageBuilder\Api\BlockInterface
 	public function getBlock($blockId)
 	{
 		$block = $this->blockFactory->create()->load($blockId);
-		//var_dump(get_class_methods($page));exit;
 		return $this->dom->parse($block->getContent());
 	}
 

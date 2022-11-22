@@ -1,16 +1,14 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright © PHPDigital, Inc. All rights reserved.
  */
-
 namespace AlbertMage\PageBuilder\Model\Widget;
 
 use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\DataObject;
 
 /**
- *
+ * @author Albert Shen <albertshen1206@gmail.com>
  */
 class Link extends \Magento\Framework\DataObject implements \AlbertMage\PageBuilder\Model\Widget\LinkInterface
 {

@@ -1,16 +1,15 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright © PHPDigital, Inc. All rights reserved.
  */
-
 namespace AlbertMage\PageBuilder\Model\Widget;
 
 use Magento\Framework\DataObject;
 use AlbertMage\PageBuilder\Model\Widget\AbstractProduct;
 
 /**
- *  Product list
+ * Product list
+ * @author Albert Shen <albertshen1206@gmail.com>
  */
 class ProductList extends AbstractProduct implements ProductListInterface
 {

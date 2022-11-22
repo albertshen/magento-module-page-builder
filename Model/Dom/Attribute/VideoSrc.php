@@ -1,14 +1,11 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright © PHPDigital, Inc. All rights reserved.
  */
-
 namespace AlbertMage\PageBuilder\Model\Dom\Attribute;
 
 /**
- *
- * @since 100.0.2
+ * @author Albert Shen <albertshen1206@gmail.com>
  */
 class VideoSrc implements \AlbertMage\PageBuilder\Model\Dom\AttributeInterface
 {

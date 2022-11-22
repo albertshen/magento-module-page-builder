@@ -1,18 +1,11 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-
-/**
- * Widget Block Interface
- *
- * @author <albertshen1206@gmail.com>
+ * Copyright © PHPDigital, Inc. All rights reserved.
  */
 namespace AlbertMage\PageBuilder\Model\Widget;
 
 /**
- * Interface \AlbertMage\PageBuilder\Model\Widget\ProductListInterface
+ * @author Albert Shen <albertshen1206@gmail.com>
  */
 interface ProductListInterface
 {

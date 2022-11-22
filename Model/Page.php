@@ -1,7 +1,12 @@
 <?php 
-	
+/**
+ * Copyright © PHPDigital, Inc. All rights reserved.
+ */
 namespace AlbertMage\PageBuilder\Model;
 
+/**
+ * @author Albert Shen <albertshen1206@gmail.com>
+ */
 class Page implements \AlbertMage\PageBuilder\Api\PageInterface
 {
 
@@ -29,7 +34,6 @@ class Page implements \AlbertMage\PageBuilder\Api\PageInterface
 	public function getPage($pageId)
 	{
 		$page = $this->pageFactory->create()->load($pageId);
-		//var_dump(get_class_methods($page));exit;
 		return $this->dom->parse($page->getContent());
 	}
 

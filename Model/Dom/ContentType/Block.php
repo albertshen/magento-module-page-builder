@@ -1,17 +1,13 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Copyright © PHPDigital, Inc. All rights reserved.
  */
-
 namespace AlbertMage\PageBuilder\Model\Dom\ContentType;
 
 use \Magento\Framework\App\ObjectManager;
 
 /**
- *
- * @api
- * @since 100.0.2
+ * @author Albert Shen <albertshen1206@gmail.com>
  */
 class Block extends \AlbertMage\PageBuilder\Model\Dom\Element
 {
