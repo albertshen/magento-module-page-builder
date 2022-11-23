@@ -112,7 +112,7 @@ class Filter
         } else {
             if ($value) {
                 $data[] = [
-                    'contentType' => 'text',
+                    'type' => 'text',
                     'value' => $value
                 ];
             }

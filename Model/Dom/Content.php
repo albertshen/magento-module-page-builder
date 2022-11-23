@@ -42,7 +42,7 @@ class Content
                 }
                 if ($childNode->tagName === 'img') {
                     array_push($data, [
-                        'tagName' => 'image',
+                        'type' => 'image',
                         'image' => [
                             'src' => $this->filter->filter($childNode->getAttribute('src')),
                             'alt' => $childNode->getAttribute('alt')
