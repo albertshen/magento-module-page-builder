@@ -9,7 +9,6 @@ namespace AlbertMage\PageBuilder\Model\Dom;
  */
 interface ElementInterface
 {
-    //const CONTENT_TYPE_
     /**
      * Parse Dom
      *
