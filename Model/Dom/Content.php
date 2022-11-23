@@ -37,9 +37,12 @@ class Content
             if ($childNode instanceof \DOMText) {
                 $data = array_merge($data, $this->filter->contentFilter($childNode->wholeText));
             } else {
+                if ($childNode->tagName === 'p') {
+                    $data = array_merge($data, $this->filter->contentFilter($childNode->textContent));
+                }
                 if ($childNode->tagName === 'img') {
                     array_push($data, [
-                        'type' => 'image',
+                        'tagName' => 'image',
                         'image' => [
                             'src' => $this->filter->filter($childNode->getAttribute('src')),
                             'alt' => $childNode->getAttribute('alt')

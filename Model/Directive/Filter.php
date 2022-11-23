@@ -87,6 +87,9 @@ class Filter
     {
 
         $data = [];
+        
+        $value = preg_replace('/^[\s\x00]+|[\s\x00]+$/u', '', $value);
+
         if (preg_match_all(self::CONSTRUCTION_PATTERN, $value, $constructions, PREG_SET_ORDER)) {
             $replace = [];
             foreach ($constructions as $construction) {
@@ -95,26 +98,27 @@ class Filter
             $str = str_replace($replace, ',,', $value);
             $arr = explode(',', $str);
             foreach ($arr as $item) {
-                if ($item) {
-                    $data[] = [
-                        'type' => 'text',
-                        'content' => $item
-                    ];
+                if (!empty($item)) {
+                    $data[] = $this->contentFilter($item);
                 } else {
                     $construction = array_shift($constructions);
                     if ($construction) {
-                        $data[] = $this->{$construction[1].'Directive'}($construction);
+                        if ($arr = $this->{$construction[1].'Directive'}($construction)) {
+                            $data[] = $arr;
+                        }
                     }
                 }
             }
-            return $data;
         } else {
-            $data[] = [
-                'type' => 'text',
-                'content' => $value
-            ];
-            return $data;
+            if ($value) {
+                $data[] = [
+                    'contentType' => 'text',
+                    'value' => $value
+                ];
+            }
         }
+
+        return $data;
 
     }
 
@@ -177,6 +181,7 @@ class Filter
         if ($widget instanceof \AlbertMage\PageBuilder\Model\Widget\BlockInterface) {
             return $widget->getBlock();
         }
+        return [];
     }
 
     public function getWidgetMetaData($originClass)

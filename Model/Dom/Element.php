@@ -17,7 +17,7 @@ class Element implements ElementInterface
     protected $elementPool;
 
     /**
-     * @var \AlbertMage\PageBuilder\Model\HrefElement
+     * @var \AlbertMage\PageBuilder\Model\Dom\HrefElement
      */
     protected $hrefElement;
 

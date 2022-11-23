@@ -23,6 +23,7 @@ class Heading extends \AlbertMage\PageBuilder\Model\Dom\Element
         $data[$this->getFieldName('data-content-type')] = $domElement->getAttribute('data-content-type');
         $data[$this->getFieldName('data-appearance')] = $domElement->getAttribute('data-appearance');
         $data['heading'] = $domElement->tagName;
+        $data['content'] = $this->getContentFilter()->parse($domElement);
 
         return $data;
     }
