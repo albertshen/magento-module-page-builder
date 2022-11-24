@@ -9,10 +9,8 @@ namespace AlbertMage\PageBuilder\Model\Widget;
  */
 interface LinkInterface
 {
-    /**
-     * 
-     */
-    const LINK_TYPE = 'link';
+
+    const TYPE = 'link';
 
     /**
      * Generaget link or path for different app

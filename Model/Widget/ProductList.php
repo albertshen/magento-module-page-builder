@@ -20,7 +20,7 @@ class ProductList extends AbstractProduct implements ProductListInterface
     public function getProductList()
     {
         $block = $this->createCollection();
-        $data['type'] = 'products';
+        $data['type'] = self::TYPE;
         foreach ($block->getItems() as $product) {
             $data['items'][] = $this->getProductData($product)->getData();
         }

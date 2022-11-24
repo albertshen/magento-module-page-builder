@@ -9,6 +9,9 @@ namespace AlbertMage\PageBuilder\Model\Widget;
  */
 interface ProductListInterface
 {
+
+    const TYPE = 'products';
+
     /**
      * Return data in the widget.
      *
@@ -19,7 +22,7 @@ interface ProductListInterface
     /**
      * Get product data.
      *
-     * @return \Magento\Framework\DataObject
+     * @return array
      */
     public function getProductData(\Magento\Catalog\Model\Product $product);
 }
