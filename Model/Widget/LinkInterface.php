@@ -9,7 +9,7 @@ namespace AlbertMage\PageBuilder\Model\Widget;
  */
 interface LinkInterface
 {
-
+    
     const TYPE = 'link';
 
     /**

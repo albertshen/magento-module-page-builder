@@ -9,7 +9,7 @@ namespace AlbertMage\PageBuilder\Model\Widget;
  */
 interface ProductListInterface
 {
-
+    
     const TYPE = 'products';
 
     /**

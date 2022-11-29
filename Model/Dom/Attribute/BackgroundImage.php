@@ -31,7 +31,7 @@ class BackgroundImage implements \AlbertMage\PageBuilder\Model\Dom\AttributeInte
      * @return mixed
      * @throws LocalizedException
      */
-    public function parse($string) 
+    public function parse($string)
     {
         $resources = json_decode(stripslashes(htmlspecialchars_decode($string)), true);
         return $this->resource->process($resources);

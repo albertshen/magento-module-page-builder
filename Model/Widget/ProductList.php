@@ -22,7 +22,7 @@ class ProductList extends AbstractProduct implements ProductListInterface
         $block = $this->createCollection();
         $data['type'] = self::TYPE;
         foreach ($block->getItems() as $product) {
-            $data['items'][] = $this->getProductData($product)->getData();
+            $data['items'][] = $this->getProductData($product);
         }
         return $data;
     }
@@ -32,11 +32,6 @@ class ProductList extends AbstractProduct implements ProductListInterface
      */
     public function getProductData(\Magento\Catalog\Model\Product $product)
     {
-        $dataObject = new DataObject([
-            'sku' => $product->getSku(),
-            'url' => $product->getProductUrl()
-        ]);
-
-        return $dataObject;
+        return [];
     }
 }

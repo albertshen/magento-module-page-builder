@@ -87,7 +87,7 @@ class Filter
     {
 
         $data = [];
-        
+
         $value = preg_replace('/^[\s\x00]+|[\s\x00]+$/u', '', $value);
 
         if (preg_match_all(self::CONSTRUCTION_PATTERN, $value, $constructions, PREG_SET_ORDER)) {
