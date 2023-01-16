@@ -29,13 +29,17 @@ class Mobile implements \AlbertMage\PageBuilder\Model\ResourceInterface
      * Process Mobile resource
      * 
      * @param array
-     * @return mixed
+     * @return array
      */
     public function process($resources)
     {
         if (isset($resources['mobile_image'])) {
             if (is_string($resources['mobile_image'])) {
-                return $this->filter->filter($resources['mobile_image']);
+                return [
+                    'src' => $this->filter->filter($resources['mobile_image']),
+                    'title' => '',
+                    'alt' => ''
+                ];
             }
             if (is_array($resources['mobile_image'])) {
                 return [
@@ -47,7 +51,11 @@ class Mobile implements \AlbertMage\PageBuilder\Model\ResourceInterface
         }
         if (isset($resources['desktop_image'])) {
             if (is_string($resources['desktop_image'])) {
-                return $this->filter->filter($resources['desktop_image']);
+                return [
+                    'src' => $this->filter->filter($resources['desktop_image']),
+                    'title' => '',
+                    'alt' => ''
+                ];
             }
             if (is_array($resources['desktop_image'])) {
                 return [

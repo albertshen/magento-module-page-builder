@@ -6,13 +6,15 @@ namespace AlbertMage\PageBuilder\Model\Widget;
 
 use Magento\Catalog\Api\CategoryRepositoryInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Webapi\ServiceOutputProcessor;
 use Magento\Framework\App\ObjectManager;
 use Magento\Rule\Model\Condition\Combine;
+use AlbertMage\Catalog\Api\ProductManagementInterface;
 
 /**
  * @author Albert Shen <albertshen1206@gmail.com>
  */
-abstract class AbstractProduct extends \Magento\Framework\DataObject
+abstract class AbstractProduct extends \Magento\Framework\DataObject implements ProductListInterface
 {
 
     /**
@@ -86,6 +88,16 @@ abstract class AbstractProduct extends \Magento\Framework\DataObject
     protected $_storeManager;
 
     /**
+     * @var ServiceOutputProcessor
+     */
+    protected $serviceOutputProcessor;
+
+    /**
+     * @var ProductManagementInterface
+     */
+    protected $productManagement;
+
+    /**
      * @param CollectionFactory $productCollectionFactory
      * @param Visibility $catalogProductVisibility
      * @param SqlBuilder $sqlBuilder
@@ -96,6 +108,8 @@ abstract class AbstractProduct extends \Magento\Framework\DataObject
      * @param \Magento\Framework\App\RequestInterface
      * @param \Magento\Store\Model\StoreManagerInterface
      * @param \Magento\Catalog\Model\Config $catalogConfig
+     * @param ServiceOutputProcessor $serviceOutputProcessor
+     * @param ProductManagementInterface $productManagement
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -109,7 +123,9 @@ abstract class AbstractProduct extends \Magento\Framework\DataObject
         CategoryRepositoryInterface $categoryRepository = null,
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Catalog\Model\Config $catalogConfig
+        \Magento\Catalog\Model\Config $catalogConfig,
+        ServiceOutputProcessor $serviceOutputProcessor,
+        ProductManagementInterface $productManagement
     ) {
         $this->productCollectionFactory = $productCollectionFactory;
         $this->catalogProductVisibility = $catalogProductVisibility;
@@ -121,6 +137,8 @@ abstract class AbstractProduct extends \Magento\Framework\DataObject
         $this->_request = $request;
         $this->_storeManager = $storeManager;
         $this->_catalogConfig = $catalogConfig;
+        $this->serviceOutputProcessor = $serviceOutputProcessor;
+        $this->productManagement = $productManagement;
         parent::__construct(
             $params
         );

@@ -44,7 +44,7 @@ class ElementPool
         }
 
         throw new \Magento\Framework\Exception\LocalizedException(
-            __('There is no content type for given type')
+            __('There is no content type for given type' . $contentType)
         );
     }
 }
