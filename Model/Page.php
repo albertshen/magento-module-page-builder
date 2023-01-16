@@ -16,9 +16,9 @@ class Page implements \AlbertMage\PageBuilder\Api\PageInterface
 	protected $pageFactory;
 
 	/**
-	* @param \Magento\Cms\Model\PageFactory
-	* @param \AlbertMage\PageBuilder\Model\Dom
-	*/
+	 * @param \Magento\Cms\Model\PageFactory
+	 * @param \AlbertMage\PageBuilder\Model\Dom
+	 */
 	public function __construct(
 		\Magento\Cms\Model\PageFactory $pageFactory,
 		\AlbertMage\PageBuilder\Model\Dom $dom

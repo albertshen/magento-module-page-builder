@@ -143,7 +143,7 @@
                     <item name="main" xsi:type="array">
                         <item name="fields" xsi:type="array">
                             <item name="data-content-type" xsi:type="array"></item>
-                            <item name="1data-appearance" xsi:type="array"></item>
+                            <item name="data-appearance" xsi:type="array"></item>
                             <item name="data-enable-parallax" xsi:type="array"></item>
                             <item name="data-parallax-speed" xsi:type="array"></item>
                             <item name="data-video-type" xsi:type="array"></item>

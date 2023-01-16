@@ -132,7 +132,7 @@ class Element implements ElementInterface
     protected function getFieldName(string $str): string 
     {
         $str = preg_replace('/^data-/i', '', $str);
-        return $this->kebabToCamel($str);
+        return $this->kebabToSnake($str);
     }
 
     /**
@@ -149,5 +149,13 @@ class Element implements ElementInterface
     protected function kebabToCamel(string $str): string
     {
         return lcfirst($this->kebabToPascal($str));
+    }
+
+    /**
+     * convert kebab-case to snake_case
+     */
+    protected function kebabToSnake(string $str): string
+    {
+        return str_replace(['-'], '_', $str);
     }
 }

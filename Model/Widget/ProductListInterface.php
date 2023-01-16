@@ -22,7 +22,7 @@ interface ProductListInterface
     /**
      * Get product data.
      *
-     * @return array
+     * @return \AlbertMage\Catalog\Api\Data\ProductInterface $product
      */
     public function getProductData(\Magento\Catalog\Model\Product $product);
 }
