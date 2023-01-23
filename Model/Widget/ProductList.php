@@ -23,7 +23,7 @@ class ProductList extends AbstractProduct
         $data['type'] = self::TYPE;
         foreach ($block->getItems() as $product) {
             $productData = $this->serviceOutputProcessor->convertValue(
-                $this->getProductData($product), \AlbertMage\Catalog\Api\Data\ProductInterface::class
+                $this->getProductListItem($product), \AlbertMage\Catalog\Api\Data\ProductListItemInterface::class
             );
             $data['items'][] = $productData;
         }
@@ -33,8 +33,8 @@ class ProductList extends AbstractProduct
     /**
      * @inheritdoc
      */
-    public function getProductData(\Magento\Catalog\Model\Product $product)
+    public function getProductListItem(\Magento\Catalog\Model\Product $product)
     {
-        return $this->productManagement->createProduct($product);
+        return $this->productManagement->createProductListItem($product);
     }
 }
