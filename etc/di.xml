@@ -101,9 +101,21 @@
                                     AlbertMage\PageBuilder\Model\Dom\Attribute\VideoSrc
                                 </item>
                             </item>
-                            <item name="data-video-loop" xsi:type="array"></item>
-                            <item name="data-video-play-only-visible" xsi:type="array"></item>
-                            <item name="data-video-lazy-load" xsi:type="array"></item>
+                            <item name="data-video-loop" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
+                            <item name="data-video-play-only-visible" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
+                            <item name="data-video-lazy-load" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
                             <item name="data-video-fallback-src" xsi:type="array">
                                 <item name="parser" xsi:type="string">
                                     AlbertMage\PageBuilder\Model\Dom\Attribute\Media
@@ -127,9 +139,21 @@
                                     AlbertMage\PageBuilder\Model\Dom\Attribute\VideoSrc
                                 </item>
                             </item>
-                            <item name="data-video-loop" xsi:type="array"></item>
-                            <item name="data-video-play-only-visible" xsi:type="array"></item>
-                            <item name="data-video-lazy-load" xsi:type="array"></item>
+                            <item name="data-video-loop" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
+                            <item name="data-video-play-only-visible" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
+                            <item name="data-video-lazy-load" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
                             <item name="data-video-fallback-src" xsi:type="array">
                                 <item name="parser" xsi:type="string">
                                     AlbertMage\PageBuilder\Model\Dom\Attribute\Media
@@ -270,9 +294,21 @@
                                     AlbertMage\PageBuilder\Model\Dom\Attribute\VideoSrc
                                 </item>
                             </item>
-                            <item name="data-video-loop" xsi:type="array"></item>
-                            <item name="data-video-play-only-visible" xsi:type="array"></item>
-                            <item name="data-video-lazy-load" xsi:type="array"></item>
+                            <item name="data-video-loop" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
+                            <item name="data-video-play-only-visible" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
+                            <item name="data-video-lazy-load" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
                             <item name="data-video-fallback-src" xsi:type="array">
                                 <item name="parser" xsi:type="string">
                                     AlbertMage\PageBuilder\Model\Dom\Attribute\Media
@@ -337,9 +373,21 @@
                                     AlbertMage\PageBuilder\Model\Dom\Attribute\VideoSrc
                                 </item>
                             </item>
-                            <item name="data-video-loop" xsi:type="array"></item>
-                            <item name="data-video-play-only-visible" xsi:type="array"></item>
-                            <item name="data-video-lazy-load" xsi:type="array"></item>
+                            <item name="data-video-loop" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
+                            <item name="data-video-play-only-visible" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
+                            <item name="data-video-lazy-load" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
                             <item name="data-video-fallback-src" xsi:type="array">
                                 <item name="parser" xsi:type="string">
                                     AlbertMage\PageBuilder\Model\Dom\Attribute\Media

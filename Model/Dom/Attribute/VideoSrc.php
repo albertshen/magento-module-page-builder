@@ -31,11 +31,11 @@ class VideoSrc implements \AlbertMage\PageBuilder\Model\Dom\AttributeInterface
      * @return mixed
      * @throws LocalizedException
      */
-    public function parse($string) 
+    public function parse($string)
     {   
         if ($string) {
-            $widget = explode(':', $string);
-            return $this->filter->filter($widget[1]);
+            $widget = str_replace('mp4:', '', $string);
+            return $this->filter->filter($widget);
         }
         return $string;
     }

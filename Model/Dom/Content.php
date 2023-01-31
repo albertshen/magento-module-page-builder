@@ -38,7 +38,7 @@ class Content
                 $data = array_merge($data, $this->filter->contentFilter($childNode->wholeText));
             } else {
                 if ($childNode->tagName === 'p') {
-                    $data = array_merge($data, $this->filter->contentFilter($childNode->textContent));
+                    $data = array_merge($data, $this->parse($childNode));
                 }
                 if ($childNode->tagName === 'img') {
                     array_push($data, [
