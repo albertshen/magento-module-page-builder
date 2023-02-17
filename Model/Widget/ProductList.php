@@ -35,6 +35,6 @@ class ProductList extends AbstractProduct
      */
     public function getProductListItem(\Magento\Catalog\Model\Product $product)
     {
-        return $this->productManagement->createProductListItem($product);
+        return $this->productManagement->getProductListItem($product);
     }
 }
