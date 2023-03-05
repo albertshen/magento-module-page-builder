@@ -66,5 +66,33 @@
                 </imports>
             </settings>
         </field>
+        <field name="video_muted" sortOrder="140" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="string">true</item>
+                </item>
+            </argument>
+            <settings>
+                <visible>false</visible>
+                <dataType>boolean</dataType>
+                <label translate="true">Video Muted</label>
+                <dataScope>video_muted</dataScope>
+                <imports>
+                    <link name="visible">${$.parentName}.background_type:videoVisible</link>
+                </imports>
+                <notice translate="true">Video Muted.</notice>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="string">false</map>
+                            <map name="true" xsi:type="string">true</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
     </fieldset>
 </form>

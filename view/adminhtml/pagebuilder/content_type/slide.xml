@@ -21,6 +21,7 @@
                         <attribute name="video_type" source="data-video-type" />
                         <attribute name="video_source_upload" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
                         <attribute name="video_source" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_muted" source="data-video-muted"/>
                     </element>
                 </elements>
             </appearance>
@@ -30,6 +31,7 @@
                         <attribute name="video_type" source="data-video-type" />
                         <attribute name="video_source_upload" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
                         <attribute name="video_source" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_muted" source="data-video-muted"/>
                     </element>
                 </elements>
             </appearance>
@@ -39,6 +41,7 @@
                         <attribute name="video_type" source="data-video-type" />
                         <attribute name="video_source_upload" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
                         <attribute name="video_source" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_muted" source="data-video-muted"/>
                     </element>
                 </elements>
             </appearance>
@@ -48,6 +51,7 @@
                         <attribute name="video_type" source="data-video-type" />
                         <attribute name="video_source_upload" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src-uploader" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
                         <attribute name="video_source" source="data-video-src" converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/src" preview_converter="AlbertMage_PageBuilder/js/content-type/video/converter/attribute/preview/src"/>
+                        <attribute name="video_muted" source="data-video-muted"/>
                     </element>
                 </elements>
             </appearance>

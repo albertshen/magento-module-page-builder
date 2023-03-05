@@ -63,7 +63,7 @@ class Link extends \Magento\Framework\DataObject implements \AlbertMage\PageBuil
         }
 
         $dataObject = new DataObject([
-            'type' => self::TYPE,
+            'id' => $this->getEntityId(),
             'url' => $this->getEntityType().'/'.$this->getEntityId()
         ]);
 

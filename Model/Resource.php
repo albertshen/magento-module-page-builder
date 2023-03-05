@@ -49,9 +49,13 @@ class Resource implements ResourceInterface
         );
     }
 
+    /**
+     * Get Resource Type
+     * For Plugin
+     */
     public function getResouceType()
     {
-        return self::RESPONSIVE;
+        return self::MOBILE;
     }
 
 

@@ -38,12 +38,14 @@ class HrefElement
             'title' => $domElement->getAttribute('title')
         ];
         $href = $domElement->getAttribute('href');
-        if (strpos($href, 'http') === 0) {
+        $linkType = $domElement->getAttribute('data-link-type');
+        $data['type'] = $linkType;
+        if ($linkType == 'default') {
             $data['url'] = $href;
         } else {
             $data = array_merge($data, $this->filter->filter($domElement->getAttribute('href')));
         }
-        unset($data['type']);
+        //unset($data['type']);
         return $data;
     }
 

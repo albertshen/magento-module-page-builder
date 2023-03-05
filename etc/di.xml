@@ -256,12 +256,28 @@
                         <item name="fields" xsi:type="array">
                             <item name="data-content-type" xsi:type="array"></item>
                             <item name="data-appearance" xsi:type="array"></item>
-                            <item name="data-autoplay" xsi:type="array"></item>
+                            <item name="data-autoplay" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
                             <item name="data-autoplay-speed" xsi:type="array"></item>
                             <item name="data-fade" xsi:type="array"></item>
-                            <item name="data-infinite-loop" xsi:type="array"></item>
-                            <item name="data-show-arrows" xsi:type="array"></item>
-                            <item name="data-show-dots" xsi:type="array"></item>
+                            <item name="data-infinite-loop" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
+                            <item name="data-show-arrows" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
+                            <item name="data-show-dots" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
+                                </item>
+                            </item>
                         </item>
                     </item>
                 </item>
@@ -312,6 +328,11 @@
                             <item name="data-video-fallback-src" xsi:type="array">
                                 <item name="parser" xsi:type="string">
                                     AlbertMage\PageBuilder\Model\Dom\Attribute\Media
+                                </item>
+                            </item>
+                            <item name="data-video-muted" xsi:type="array">
+                                <item name="parser" xsi:type="string">
+                                    AlbertMage\PageBuilder\Model\Dom\Attribute\Boolean
                                 </item>
                             </item>
                             <item name="data-video-type" xsi:type="array"></item>

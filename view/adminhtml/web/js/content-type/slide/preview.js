@@ -24,7 +24,7 @@ define(["Magento_PageBuilder/js/content-type/slide/preview"], function (_preview
       }
       
       _this = _preview2.call.apply(_preview2, [this].concat(args)) || this;
-      _this.videoUpdateProperties = ["background_type", "video_fallback_image", "video_lazy_load", "video_loop", "video_play_only_visible", "video_source", "video_source_upload", "video_type"];
+      _this.videoUpdateProperties = ["background_type", "video_fallback_image", "video_lazy_load", "video_loop", "video_play_only_visible", "video_source", "video_source_upload", "video_type", "video_muted"];
       return _this;
     }
 
