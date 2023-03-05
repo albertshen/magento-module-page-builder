@@ -45,6 +45,7 @@ class Link extends \Magento\Framework\DataObject implements \AlbertMage\PageBuil
 
     /**
      * Get link data object
+     * For Plugin
      *
      * @throws \RuntimeException
      * @return \Magento\Framework\DataObject\DataObject
