@@ -13,7 +13,7 @@ interface PageInterface {
     /**
      * Retrieve page.
      *
-     * @param int $pageId
+     * @param string $pageId
      * @return array
      * @throws \Magento\Framework\Exception\LocalizedException
      */

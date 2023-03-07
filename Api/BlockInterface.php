@@ -11,13 +11,21 @@ interface BlockInterface {
 
 
     /**
-     * Retrieve block.
+     * Retrieve block by blockIdentifier.
      *
-     * @param string $blockId
+     * @param string $blockIdentifier
      * @return array
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getBlock($blockId);
+    public function getBlockByIdentifier(string $blockIdentifier);
 
+    /**
+     * Retrieve block by id.
+     *
+     * @param int $blockId
+     * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getBlockById(int $blockId);
 
 }
