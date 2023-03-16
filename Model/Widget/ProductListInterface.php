@@ -18,11 +18,5 @@ interface ProductListInterface
      * @return array
      */
     public function getProductList();
-
-    /**
-     * Get product data.
-     *
-     * @return \AlbertMage\Catalog\Api\Data\ProductListItemInterface $product
-     */
-    public function getProductListItem(\Magento\Catalog\Model\ProductListItem $product);
+    
 }
