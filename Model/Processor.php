@@ -41,6 +41,22 @@ class Processor
         $this->imageFactory = $imageFactory;
     }
 
+
+    /**
+     * Process attribute
+     * 
+     * @param string $value
+     * @return string
+     * @throws LocalizedException
+     */
+    public function processAttribute($field, $value)
+    {
+        if (in_array($value, ['true', 'false'])) {
+            return $value == 'true';
+        }
+        return $value;
+    }
+
     /**
      * Process Background
      * 

@@ -121,7 +121,9 @@ class Element implements ElementInterface
 
         foreach ($domElement->attributes as $item) {
             if (strpos($item->localName, 'data-') == 0) {
-                $elementData->setData($this->getFieldName($item->localName), $item->textContent);
+                $field = $this->getFieldName($item->localName);
+                $value = $this->processor->processAttribute($field, $item->textContent);
+                $elementData->setData($field, $value);
             }
         }
 
