@@ -20,13 +20,8 @@ class ProductList extends AbstractProduct
     {
         $data = [];
         $block = $this->createCollection();
-        $data['type'] = self::TYPE;
         foreach ($block->getItems() as $product) {
-            $productData = $this->serviceOutputProcessor->convertValue(
-                $this->productManagement->getListItem($product->getId()),
-                \AlbertMage\Catalog\Api\Data\ProductInterface::class
-            );
-            $data['items'][] = $productData;
+            $data[] = $this->productManagement->getListItem($product->getId());
         }
         return $data;
     }

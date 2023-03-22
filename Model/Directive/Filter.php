@@ -5,10 +5,14 @@
 namespace AlbertMage\PageBuilder\Model\Directive;
 
 use Magento\Framework\App\ObjectManager;
+
+use AlbertMage\PageBuilder\Model\Widget\LinkInterface;
+use AlbertMage\PageBuilder\Model\Widget\ProductListInterface;
+use AlbertMage\PageBuilder\Model\Widget\BlockInterface;
 use Magento\Framework\UrlInterface;
 
 /**
- * Template Filter Model
+ * Filter Model
  * @author Albert Shen <albertshen1206@gmail.com>
  */
 class Filter
@@ -24,56 +28,97 @@ class Filter
     /**
      * @var VariableResolverInterface|null
      */
-    private $variableResolver;
+    protected $variableResolver;
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    protected $_storeManager;
+    protected $storeManager;
 
     /**
-     * @var array
+     * @var \AlbertMage\PageBuilder\Model\DirectiveFactory
      */
-    protected $widgetMetaData;
+    protected $directiveFactory;
+
+    /**
+     * @var \AlbertMage\PageBuilder\Model\WidgetFactory
+     */
+    protected $widgetFactory;
 
     /**
      * @param \Magento\Framework\Filter\VariableResolverInterface|null $variableResolver
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \AlbertMage\PageBuilder\Model\DirectiveFactory $directiveFactory
+     * @param \AlbertMage\PageBuilder\Model\WidgetFactory $widgetFactory
      */
     public function __construct(
         \Magento\Framework\Filter\VariableResolverInterface $variableResolver = null,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        array $widgetMetaData
+        \AlbertMage\PageBuilder\Model\DirectiveFactory $directiveFactory,
+        \AlbertMage\PageBuilder\Model\WidgetFactory $widgetFactory
     ) {
         $this->variableResolver = $variableResolver ?? ObjectManager::getInstance()->get(\Magento\Framework\Filter\VariableResolverInterface::class);
-        $this->_storeManager = $storeManager;
-        $this->widgetMetaData = $widgetMetaData;
+        $this->storeManager = $storeManager;
+        $this->directiveFactory = $directiveFactory;
+        $this->widgetFactory = $widgetFactory;
     }
 
     /**
-     * Filter the string as array data.
+     * Filter the string.
      *
      * @param string $value
-     * @return array
+     * @return \AlbertMage\PageBuilder\Api\Data\DirectiveInterface
      * @throws \Exception
      */
     public function filter($value)
     {
-        $results = [];
+
+        $directive = $this->directiveFactory->create();
+
+        $value = preg_replace('/^[\s\x00]+|[\s\x00]+$/u', '', $value);
 
         if (preg_match_all(self::CONSTRUCTION_PATTERN, $value, $constructions, PREG_SET_ORDER)) {
-            foreach ($constructions as $construction) {
-                $results[] = $this->{$construction[1].'Directive'}($construction);
+
+            $construction = $constructions[0];
+            $directiveType = $construction[1];
+
+            $directive->setType($directiveType);
+
+            if ('media' == $directiveType) {
+                $directive->setUrl($this->mediaDirective($construction));
             }
-        } else {
-            return $value;
-        }
 
-        if (count($results) === 1) {
-            $results = $results[0];
+            if ('widget' == $directiveType) {
+                $directive->setWidget($this->widgetDirective($construction));
+            }
         }
+        return $directive;
+    }
 
-        return $results;
+    /**
+     * Filter the media url.
+     *
+     * @param string $value
+     * @return string
+     * @throws \Exception
+     */
+    public function mediaFilter($value)
+    {
+        $directive = $this->filter($value);
+        return $directive->getUrl();
+    }
+
+    /**
+     * Filter the widget.
+     *
+     * @param string $value
+     * @return @return \AlbertMage\PageBuilder\Api\Data\WidgetInterface
+     * @throws \Exception
+     */
+    public function widgetFilter($value)
+    {
+        $directive = $this->filter($value);
+        return $directive->getWidget();
     }
 
     /**
@@ -126,11 +171,46 @@ class Filter
      * Generate widget
      *
      * @param string[] $construction
-     * @return string
+     * @return \AlbertMage\PageBuilder\Api\Data\WidgetInterface
      */
     public function widgetDirective($construction)
     {
-        return $this->generateWidget($construction);
+        $params = $this->getParameters($construction[2]);
+
+        $widget = $this->widgetFactory->create();
+
+        $widgetType = $params['type'];
+        unset($params['type']);
+        unset($params['template']);
+        $params['store_id'] = $this->storeManager->getStore()->getId();
+
+        $widget->setType($widgetType);
+
+        switch($widgetType) {
+            case 'Magento\Catalog\Block\Product\Widget\Link':
+                $link = ObjectManager::getInstance()->create(LinkInterface::class, ['params' => $params]);
+                $widget->setLink($link->getLink());
+                break;
+            case 'Magento\Cms\Block\Widget\Page\Link':
+                $link = ObjectManager::getInstance()->create(LinkInterface::class, ['params' => $params]);
+                $widget->setLink($link->getLink());
+                break;
+            case 'Magento\Catalog\Block\Category\Widget\Link':
+                $link = ObjectManager::getInstance()->create(LinkInterface::class, ['params' => $params]);
+                $widget->setLink($link->getLink());
+                break;
+            case 'Magento\CatalogWidget\Block\Product\ProductsList':
+                $product = ObjectManager::getInstance()->create(ProductListInterface::class, ['params' => $params]);
+                $widget->setProducts($product->getProductList());
+                break;
+            case 'Magento\Cms\Block\Widget\Block':
+                $block = ObjectManager::getInstance()->create(BlockInterface::class, ['params' => $params]);
+                $widget->setBlock($block->getBlock());
+                break;
+        }
+
+        return $widget;
+
     }
 
     /**
@@ -143,51 +223,14 @@ class Filter
     {
         // phpcs:disable Magento2.Functions.DiscouragedFunction
         $params = $this->getParameters(html_entity_decode($construction[2], ENT_QUOTES));
-        return 'http://localhost:9090/media/'.$params['url'];
-        return $this->_storeManager->getStore()
+        //return 'http://localhost:9090/media/'.$params['url'];
+        return $this->storeManager->getStore()
             ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $params['url'];
     }
 
     public function configDirective($construction)
     {
         return [];
-    }
-    
-    /**
-     * General method for generate widget
-     *
-     * @param string[] $construction
-     * @return array
-     */
-    public function generateWidget($construction)
-    {
-        $params = $this->getParameters($construction[2]);
-
-        $params['type'] = $this->getWidgetMetaData($params['type']);
-
-        $params['store_id'] = $this->_storeManager->getStore()->getId();
-
-        $widget = ObjectManager::getInstance()->create($params['type'], ['params' => $params]);
-
-        if ($widget instanceof \AlbertMage\PageBuilder\Model\Widget\LinkInterface) {
-
-            return $widget->getLink();
-        }
-
-        if ($widget instanceof \AlbertMage\PageBuilder\Model\Widget\ProductListInterface) {
-
-            return $widget->getProductList();
-        }
-        
-        if ($widget instanceof \AlbertMage\PageBuilder\Model\Widget\BlockInterface) {
-            return $widget->getBlock();
-        }
-        return [];
-    }
-
-    public function getWidgetMetaData($originClass)
-    {
-        return $this->widgetMetaData[$originClass] ?? $originClass;
     }
 
     /**

@@ -7,7 +7,7 @@ namespace AlbertMage\PageBuilder\Model;
 /**
  * @author Albert Shen <albertshen1206@gmail.com>
  */
-class Page implements \AlbertMage\PageBuilder\Api\PageInterface
+class PageManagement implements \AlbertMage\PageBuilder\Api\PageManagementInterface
 {
 
     /**

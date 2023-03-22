@@ -5,7 +5,6 @@
 namespace AlbertMage\PageBuilder\Model;
 
 use Symfony\Component\DomCrawler\Crawler;
-use Magento\Cms\Model\Template\Filter;
 use Magento\Framework\App\ObjectManager;
 
 /**
@@ -32,7 +31,7 @@ class Dom
     /**
      * Parse Dom
      *
-     * @return array
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface[]
      * @throws LocalizedException
      */
     public function parse($content): array
@@ -46,10 +45,11 @@ class Dom
 
         foreach ($crawler as $domElement) {
             $contentType = $domElement->getAttribute('data-content-type');
-            $domArray = $this->elementPool->create($contentType)->parse($domElement);
-            $data[] = $domArray;
+            $elements = $this->elementPool->create($contentType)->parse($domElement);
+            $data[] = $elements;
         }
 
         return $data;
     }
 }
+

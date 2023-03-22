@@ -9,5 +9,14 @@ namespace AlbertMage\PageBuilder\Model\Dom\ContentType;
  */
 class Banner extends \AlbertMage\PageBuilder\Model\Dom\Element
 {
-
+    /**
+     * Parse Dom
+     *
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface
+     * @throws LocalizedException
+     */
+    public function parse(\DOMElement $domElement)
+    {
+        return $this->parseSliderBannerElement($domElement);
+    }
 }

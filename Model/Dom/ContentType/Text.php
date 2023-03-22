@@ -13,18 +13,15 @@ class Text extends \AlbertMage\PageBuilder\Model\Dom\Element
     /**
      * Parse Dom
      *
-     * @return array
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface
      * @throws LocalizedException
      */
-    public function parse($domElement): array
+    public function parse($domElement)
     {
-
-        $data = [];
-        $data[$this->getFieldName('data-content-type')] = $domElement->getAttribute('data-content-type');
-        $data[$this->getFieldName('data-appearance')] = $domElement->getAttribute('data-appearance');
-        $data['content'] = $this->getContentFilter()->parse($domElement);
-
-        return $data;
+        $elementData = $this->createElementByDom($domElement);
+        $content = $this->content->parse($domElement);
+        $elementData->setContent($content);
+        return $elementData;
     }
 
 }

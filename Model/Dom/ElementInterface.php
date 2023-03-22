@@ -15,5 +15,5 @@ interface ElementInterface
      * @return array
      * @throws LocalizedException
      */
-    public function parse(\DOMElement $domElement) : array;
+    public function parse(\DOMElement $domElement);
 }

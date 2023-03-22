@@ -13,9 +13,9 @@ interface BlockInterface
     /**
      * Get block
      *
-     * @return array
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface[]
      * @throws LocalizedException
      */
-    public function getBlock() : array;
+    public function getBlock();
 
 }

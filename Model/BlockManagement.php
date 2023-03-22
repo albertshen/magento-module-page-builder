@@ -7,7 +7,7 @@ namespace AlbertMage\PageBuilder\Model;
 /**
  * @author Albert Shen <albertshen1206@gmail.com>
  */
-class Block implements \AlbertMage\PageBuilder\Api\BlockInterface
+class BlockManagement implements \AlbertMage\PageBuilder\Api\BlockManagementInterface
 {
 
     /**

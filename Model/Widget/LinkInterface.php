@@ -9,21 +9,13 @@ namespace AlbertMage\PageBuilder\Model\Widget;
  */
 interface LinkInterface
 {
-    
-    const TYPE = 'link';
 
     /**
-     * Generaget link or path for different app
+     * Generaget link
      *
-     * @return array
+     * @return \AlbertMage\PageBuilder\Api\Data\LinkInterface
      * @throws LocalizedException
      */
-    public function getLink() : array;
+    public function getLink();
 
-    /**
-     * Get link data.
-     *
-     * @return \Magento\Framework\DataObject
-     */
-    public function getLinkData();
 }

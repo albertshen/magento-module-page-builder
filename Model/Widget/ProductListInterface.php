@@ -9,13 +9,11 @@ namespace AlbertMage\PageBuilder\Model\Widget;
  */
 interface ProductListInterface
 {
-    
-    const TYPE = 'products';
 
     /**
-     * Return data in the widget.
+     * Get product list.
      *
-     * @return array
+     * @return \AlbertMage\Catalog\Api\Data\ProductInterface[]
      */
     public function getProductList();
     

@@ -4,6 +4,8 @@
  */
 namespace AlbertMage\PageBuilder\Model\Dom\ContentType;
 
+use \Magento\Framework\App\ObjectManager;
+
 /**
  * @author Albert Shen <albertshen1206@gmail.com>
  */
@@ -13,32 +15,35 @@ class Tabs extends \AlbertMage\PageBuilder\Model\Dom\Element
     /**
      * Parse Dom
      *
-     * @return array
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface
      * @throws LocalizedException
      */
-    public function parse($domElement): array
+    public function parse(\DOMElement $domElement)
     {
 
-        $data = [];
-        $data[$this->getFieldName('data-content-type')] = $domElement->getAttribute('data-content-type');
-        $data[$this->getFieldName('data-appearance')] = $domElement->getAttribute('data-appearance');
-        $data[$this->getFieldName('data-active-tab')] = $domElement->getAttribute('data-active-tab');
+        $elementData = $this->createElementByDom($domElement);
 
         foreach ($domElement->childNodes as $childNode) {
-            if ($childNode->getAttribute('data-element') === 'navigation') {
+            if ('navigation' == $childNode->getAttribute('data-element')) {
+                $tabHeaders = [];
                 foreach ($childNode->childNodes as $navChildNode) {
-                    $data[$this->getFieldName($childNode->getAttribute('data-element'))][] = $navChildNode->firstChild->firstChild->firstChild->wholeText;
+                    $tabHeader = ObjectManager::getInstance()->get(\AlbertMage\PageBuilder\Api\Data\TabHeaderInterface::class);
+                    $tabHeader->setTitle($navChildNode->firstChild->firstChild->firstChild->wholeText);
+                    $tabHeaders[] = $tabHeader;
                 }
+                $elementData->setTabHeader($tabHeaders);
             }
-            if ($childNode->getAttribute('data-element') === 'content') {
+            if ('content' == $childNode->getAttribute('data-element')) {
+                $tabItems = [];
                 foreach ($childNode->childNodes as $contentChildNode) {
                     $contentType = $contentChildNode->getAttribute('data-content-type');
-                    $data[$this->getFieldName($childNode->getAttribute('data-element'))][] = $this->elementPool->create($contentType)->parse($contentChildNode);
+                    $tabItems[] = $this->elementPool->create($contentType)->parse($contentChildNode);
                 }
+                $elementData->setTabItems($tabItems);
             }
         }
 
-        return $data;
+        return $elementData;
     }
 
 }

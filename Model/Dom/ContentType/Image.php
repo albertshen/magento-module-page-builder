@@ -11,60 +11,45 @@ class Image extends \AlbertMage\PageBuilder\Model\Dom\Element
 {
 
     /**
-     * @var \AlbertMage\PageBuilder\Model\ResourceInterface
-     */
-    protected $resource;
-
-    /**
-     * @param \AlbertMage\PageBuilder\Model\Dom\ElementPool
-     * @param \AlbertMage\PageBuilder\Model\Dom\HrefElement
-     * @param array
-     */
-    public function __construct(
-        \AlbertMage\PageBuilder\Model\ResourceInterface $resource,
-        \AlbertMage\PageBuilder\Model\Dom\ElementPool $elementPool,
-        \AlbertMage\PageBuilder\Model\Dom\HrefElement $hrefElement,
-        array $attributes = []
-    )
-    {
-        $this->resource = $resource;
-        parent::__construct(
-            $elementPool,
-            $hrefElement,
-            $attributes
-        );
-    }
-
-    /**
      * Parse Dom
      *
-     * @return array
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface
      * @throws LocalizedException
      */
-    public function parse($domElement): array
+    public function parse(\DOMElement $domElement)
     {
+        $elementData = $this->createElementByDom($domElement);
 
-        $data = [];
-        $data[$this->getFieldName('data-content-type')] = $domElement->getAttribute('data-content-type');
-        $data[$this->getFieldName('data-appearance')] = $domElement->getAttribute('data-appearance');
-        if ($domElement->firstChild->tagName === 'a') {
-            $data['link'] = $this->hrefElement->parse($domElement->firstChild);
+        if ('link' === $domElement->firstChild->getAttribute('data-element')) {
+            $elementData->setLink($this->linkElement->parse($domElement->firstChild));
             $childNodes = $domElement->firstChild->childNodes;
         } else {
             $childNodes = $domElement->childNodes;
         }
 
-        $images = [];
-        foreach ($childNodes as $node) {
-            $images[$node->getAttribute('data-element')] = [
-                'src' => $node->getAttribute('src'),
-                'title' => $node->getAttribute('title'),
-                'alt' => $node->getAttribute('alt')
-            ];
-        }
-        $data = array_merge($data, $this->resource->process($images));
+        $image = $this->imageFactory->create();
 
-        return $data;
+        foreach ($childNodes as $node) {
+            $src = $this->filter->mediaFilter($node->getAttribute('src'));
+            if ('desktop_image' == $node->getAttribute('data-element')) {
+                $image->setDesktopSrc($src); 
+            }
+            if ('mobile_image' == $node->getAttribute('data-element')) {
+                $image->setMobileSrc($src); 
+            }
+            if ($node->getAttribute('title')) {
+                $image->setTitle($node->getAttribute('title'));
+            }
+            if ($node->getAttribute('alt')) {
+                $image->setAlt($node->getAttribute('alt'));
+            }
+        }
+
+        $this->processor->processImage($image);
+
+        $elementData->setImage($image);
+
+        return $elementData;
     }
 
 }

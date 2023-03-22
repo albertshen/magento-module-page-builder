@@ -5,6 +5,9 @@
 namespace AlbertMage\PageBuilder\Model\Dom;
 
 use \Magento\Framework\App\ObjectManager;
+use \AlbertMage\PageBuilder\Model\ElementFactory;
+use \AlbertMage\PageBuilder\Model\ImageFactory;
+use \AlbertMage\PageBuilder\Model\Dom\LinkElement;
 
 /**
  * @author Albert Shen <albertshen1206@gmail.com>
@@ -17,116 +20,147 @@ class Element implements ElementInterface
     protected $elementPool;
 
     /**
-     * @var \AlbertMage\PageBuilder\Model\Dom\HrefElement
+     * @var \AlbertMage\PageBuilder\Model\ElementFactory
      */
-    protected $hrefElement;
+    protected $elementFactory;
 
     /**
-     * @var string
+     * @var \AlbertMage\PageBuilder\Model\ImageFactory
      */
-    protected $appearance;
+    protected $imageFactory;
 
     /**
-     * @var array
+     * @var \AlbertMage\PageBuilder\Model\VideoFactory
      */
-    protected $attributes;
+    protected $videoFactory;
 
     /**
-     * @param \AlbertMage\PageBuilder\Model\Dom\ElementPool
-     * @param \AlbertMage\PageBuilder\Model\Dom\HrefElement
-     * @param array
+     * @var \AlbertMage\PageBuilder\Model\Dom\LinkElement
+     */
+    protected $linkElement;
+
+    /**
+     * @var \AlbertMage\PageBuilder\Model\Dom\Content
+     */
+    protected $content;
+
+    /**
+     * @var \AlbertMage\PageBuilder\Model\Directive\Filter
+     */
+    protected $filter;
+
+    /**
+     * @var \AlbertMage\PageBuilder\Model\Processor
+     */
+    protected $processor;
+
+    /**
+     * @param \AlbertMage\PageBuilder\Model\Dom\ElementPool $elementPool
+     * @param \AlbertMage\PageBuilder\Model\ElementFactory $elementFactory
+     * @param \AlbertMage\PageBuilder\Model\ImageFactory $imageFactory
+     * @param \AlbertMage\PageBuilder\Model\VideoFactory $videoFactory
+     * @param \AlbertMage\PageBuilder\Model\Dom\LinkElement $linkElement
+     * @param \AlbertMage\PageBuilder\Model\Dom\Content $content
+     * @param \AlbertMage\PageBuilder\Model\Directive\Filter $filter
+     * @param \AlbertMage\PageBuilder\Model\Processor $processor
      */
     public function __construct(
         \AlbertMage\PageBuilder\Model\Dom\ElementPool $elementPool,
-        \AlbertMage\PageBuilder\Model\Dom\HrefElement $hrefElement,
-        array $attributes = []
-    )
-    {
+        \AlbertMage\PageBuilder\Model\ElementFactory $elementFactory,
+        \AlbertMage\PageBuilder\Model\ImageFactory $imageFactory,
+        \AlbertMage\PageBuilder\Model\VideoFactory $videoFactory,
+        \AlbertMage\PageBuilder\Model\Dom\LinkElement $linkElement,
+        \AlbertMage\PageBuilder\Model\Dom\Content $content,
+        \AlbertMage\PageBuilder\Model\Directive\Filter $filter,
+        \AlbertMage\PageBuilder\Model\Processor $processor
+    ) {
         $this->elementPool = $elementPool;
-        $this->hrefElement = $hrefElement;
-        $this->attributes = $attributes;
+        $this->elementFactory = $elementFactory;
+        $this->imageFactory = $imageFactory;
+        $this->videoFactory = $videoFactory;
+        $this->linkElement = $linkElement;
+        $this->content = $content;
+        $this->filter = $filter;
+        $this->processor = $processor;
     }
+
 
     /**
      * Parse Dom
      *
-     * @return array
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface
      * @throws LocalizedException
      */
-    public function parse(\DOMElement $domElement): array
+    public function parse(\DOMElement $domElement)
     {
 
-        $this->appearance = $domElement->getAttribute('data-appearance');
+        $elementData = $this->createElementByDom($domElement);
 
-        return $this->doParse($domElement);
-        
-    }
-
-    public function doParse(\DOMElement $domElement)
-    {
-        $element = $domElement->getAttribute('data-element');
-
-        $data = [];
-
-        $config = $this->attributes[$this->appearance][$element] ?? ($this->attributes['default'][$element] ?? []);
-
-        if ($config) {
-            $data = $this->extractAttributes($domElement, $config);
-            if (isset($config['show'])) {
-                $fieldName = $config['show'] ? $this->getFieldName($config['show']) : $element;
-                $data = [$fieldName => $data];
-            }
-        } else {
-            // attributes not defined
-            if ($element === 'link') {
-                $data['link'] = $this->hrefElement->parse($domElement);
-            }
-        }
-
-        // Process text element (not defined)
-        if (count($domElement->childNodes) === 1 && $domElement->childNodes[0] instanceof \DOMText) {
-            $filter = ObjectManager::getInstance()->get(\AlbertMage\PageBuilder\Model\Directive\Filter::class);
-            $data[$this->getFieldName($domElement->getAttribute('data-element'))] = $filter->filter($domElement->childNodes[0]->wholeText);
-            return $data;
-        }
-
-        // Core processor (defined)
+        $elements = [];
         foreach ($domElement->childNodes as $node) {
-            if ($node->getAttribute('data-element') === 'main') {
-                $contentType = $node->getAttribute('data-content-type');
-                $data['elements'][] = $this->elementPool->create($contentType)->parse($node);
-            } else {
-                if ($node->getAttribute('data-element') === 'content') {
-                    $data[$this->getFieldName($this->getFieldName('content'))] = $this->getContentFilter()->parse($node);
-                } else {
-                    $data = array_merge($data, $this->doParse($node));
-                }
+            $elements[] = $this->elementPool->create($node->getAttribute('data-content-type'))->parse($node);
+        }
+        $elementData->setElements($elements);
+
+        return $elementData;
+    }
+
+    public function createElementByDom(\DOMElement $domElement) {
+
+        $elementData = $this->elementFactory->create();
+
+        $this->updateElementByDom($elementData, $domElement);
+
+        return $elementData;
+    }
+
+    public function updateElementByDom(
+        \AlbertMage\PageBuilder\Api\Data\ElementInterface $elementData,
+        \DOMElement $domElement
+    ) {
+
+        foreach ($domElement->attributes as $item) {
+            if (strpos($item->localName, 'data-') == 0) {
+                $elementData->setData($this->getFieldName($item->localName), $item->textContent);
             }
         }
 
-        return $data;
+        return $elementData;
     }
 
-    protected function extractAttributes(\DOMElement $domElement, $config)
+    /**
+     * Process Background
+     * 
+     * @param \DOMElement $domElement
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface
+     * @throws LocalizedException
+     */
+    protected function parseSliderBannerElement(\DOMElement $domElement)
     {
-        $data = [];
-        foreach ($config['fields'] as $attribute => $setting) {
-            $fieldName = $setting['field-name'] ?? $this->getFieldName($attribute);
-            if (!empty($setting['parser'])) {
-                $parser = ObjectManager::getInstance()->get($setting['parser']);
-                if ($parser instanceof \AlbertMage\PageBuilder\Model\Dom\AttributeInterface) {
-                    $data[$fieldName] = $parser->parse($domElement->getAttribute($attribute));
-                }
-            } else {
-                $data[$fieldName] = $domElement->getAttribute($attribute);
-            }
+        $elementData = $this->createElementByDom($domElement);
+
+        $this->updateElementByDom($elementData, $domElement);
+
+        if ('link' === $domElement->firstChild->getAttribute('data-element')) {
+            $elementData->setLink($this->linkElement->parse($domElement->firstChild));
         }
-        return $data;
-    }
+        $wrapperElement = $domElement->firstChild->firstChild;
 
-    protected function getContentFilter()
-    {
-        return ObjectManager::getInstance()->get(\AlbertMage\PageBuilder\Model\Dom\Content::class);
+        $this->updateElementByDom($elementData, $wrapperElement);
+
+        $this->processor->processBackgound($elementData);
+
+        $overlayElement = $wrapperElement->firstChild;
+
+        if ($overlayColor = $overlayElement->getAttribute('data-overlay-color')) {
+            $elementData->setOverlayColor($overlayColor);
+        }
+
+        if ($content = $this->content->parse($overlayElement->firstChild->firstChild)) {
+            $elementData->setContent($content);
+        }
+
+        return $elementData;
     }
 
     protected function getFieldName(string $str): string 
@@ -136,26 +170,11 @@ class Element implements ElementInterface
     }
 
     /**
-     * convert kebab-case to PascalCase
-     */
-    protected function kebabToPascal(string $str): string
-    {
-       return str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $str)));
-    }
-
-    /**
-     * convert kebab-case to camelCase
-     */
-    protected function kebabToCamel(string $str): string
-    {
-        return lcfirst($this->kebabToPascal($str));
-    }
-
-    /**
      * convert kebab-case to snake_case
      */
     protected function kebabToSnake(string $str): string
     {
         return str_replace(['-'], '_', $str);
     }
+
 }

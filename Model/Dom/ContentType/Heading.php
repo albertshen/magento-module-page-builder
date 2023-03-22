@@ -13,19 +13,15 @@ class Heading extends \AlbertMage\PageBuilder\Model\Dom\Element
     /**
      * Parse Dom
      *
-     * @return array
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface
      * @throws LocalizedException
      */
-    public function parse($domElement): array
+    public function parse($domElement)
     {
-
-        $data = [];
-        $data[$this->getFieldName('data-content-type')] = $domElement->getAttribute('data-content-type');
-        $data[$this->getFieldName('data-appearance')] = $domElement->getAttribute('data-appearance');
-        $data['heading'] = $domElement->tagName;
-        $data['content'] = $this->getContentFilter()->parse($domElement);
-
-        return $data;
+        $elementData = $this->createElementByDom($domElement);
+        $elementData->setText($domElement->textContent);
+        return $elementData;
     }
+
 
 }

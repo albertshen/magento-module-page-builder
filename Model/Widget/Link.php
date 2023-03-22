@@ -4,8 +4,8 @@
  */
 namespace AlbertMage\PageBuilder\Model\Widget;
 
-use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\DataObject;
+use AlbertMage\PageBuilder\Model\LinkFactory;
 
 /**
  * @author Albert Shen <albertshen1206@gmail.com>
@@ -14,67 +14,54 @@ class Link extends \Magento\Framework\DataObject implements \AlbertMage\PageBuil
 {
 
     /**
-     * Application Event Dispatcher
-     *
-     * @var ManagerInterface
+     * @var \AlbertMage\PageBuilder\Model\LinkFactory
      */
-    protected $eventManager;
-    
+    protected $linkFactory;
+
     /**
-     * @param ManagerInterface
+     * @param \AlbertMage\PageBuilder\Model\LinkFactory $linkFactory
      * @param array
      */
     public function __construct(
-        ManagerInterface $eventManager,
+        \AlbertMage\PageBuilder\Model\LinkFactory $linkFactory,
         array $params
     )
     {
-        $this->eventManager = $eventManager;
         parent::__construct(
             $params
         );
+        $this->linkFactory = $linkFactory;
     }
 
     /**
      * @inheritdoc
      */
-    public function getLink() : array
+    public function getLink()
     {
-        return $this->getLinkData()->getData();
-    }
 
-    /**
-     * Get link data object
-     * For Plugin
-     *
-     * @throws \RuntimeException
-     * @return \Magento\Framework\DataObject\DataObject
-     */
-    public function getLinkData()
-    {
+        $link = $this->linkFactory->create();
+
         if ($this->hasData('page_id')) {
-            $this->setEntityId($this->getData('page_id'));
-            $this->setEntityType('page');
+            $link->setId($this->getData('page_id'));
+            $link->setUrl('page/'.$this->getData('page_id'));
         }
 
         if ($this->hasData('id_path')) {
             $rewriteData = $this->parseIdPath($this->getData('id_path'));
-            $this->setEntityId($rewriteData[1]);
-            $this->setEntityType($rewriteData[0]);
+            $link->setId($rewriteData[1]);
+            $link->setUrl($rewriteData[0].'/'.$rewriteData[1]);
         }
 
-        $dataObject = new DataObject([
-            'id' => $this->getEntityId(),
-            'url' => $this->getEntityType().'/'.$this->getEntityId()
-        ]);
+        if ($this->hasData('title')) {
+            $link->setTitle($this->getData('title'));
+        }
 
         if ($this->hasData('anchor_text')) {
-            $dataObject->setText($this->getData('anchor_text'));
+            $link->setAnchorText($this->getData('anchor_text'));
         }
-        if ($this->hasData('title')) {
-            $dataObject->setTitle($this->getData('title'));
-        }
-        return $dataObject;
+
+        return $link;
+
     }
 
     /**
@@ -84,7 +71,7 @@ class Link extends \Magento\Framework\DataObject implements \AlbertMage\PageBuil
      * @throws \RuntimeException
      * @return array
      */
-    protected function parseIdPath($idPath)
+    private function parseIdPath($idPath)
     {
         $rewriteData = explode('/', $idPath);
 

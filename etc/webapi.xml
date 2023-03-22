@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
 	<route url="/V1/pagebuilder/page/:pageIdentifier" method="GET">
-		<service class="AlbertMage\PageBuilder\Api\PageInterface" method="getPageByIdentifier"/>
+		<service class="AlbertMage\PageBuilder\Api\PageManagementInterface" method="getPageByIdentifier"/>
 		<resources>
 			<resource ref="anonymous"/>
 		</resources>
 	</route>
 	<route url="/V1/pagebuilder/block/:blockIdentifier" method="GET">
-		<service class="AlbertMage\PageBuilder\Api\BlockInterface" method="getBlockByIdentifier"/>
+		<service class="AlbertMage\PageBuilder\Api\BlockManagementInterface" method="getBlockByIdentifier"/>
 		<resources>
 			<resource ref="anonymous"/>
 		</resources>

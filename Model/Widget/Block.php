@@ -37,15 +37,18 @@ class Block extends \Magento\Framework\DataObject implements \AlbertMage\PageBui
     }
 
     /**
-     * 
-     */ 
-    public function getBlock(): array
+     * Get block
+     *
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface[]
+     * @throws LocalizedException
+     */
+    public function getBlock()
     {
         $block = $this->_blockFactory->create();
-        $block->setStoreId($this->getData('store_id'))->load($this->getData('block_id'));
-        return [
-            'type' => $this->getData('type_name'),
-            'block' => $this->dom->parse($block->getContent())
-        ];
+
+        // $block = $block->setStoreId($this->getData('store_id'))->load($this->getData('block_id'));
+        $block = $block->load($this->getData('block_id'));
+
+        return $this->dom->parse($block->getContent());
     }
 }

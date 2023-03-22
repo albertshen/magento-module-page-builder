@@ -14,19 +14,19 @@ class Block extends \AlbertMage\PageBuilder\Model\Dom\Element
     /**
      * Parse Dom
      *
-     * @return array
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface
      * @throws LocalizedException
      */
-    public function parse($domElement): array
+    public function parse(\DOMElement $domElement)
     {
 
-        $data = [];
-        $data[$this->getFieldName('data-content-type')] = $domElement->getAttribute('data-content-type');
-        $data[$this->getFieldName('data-appearance')] = $domElement->getAttribute('data-appearance');
+        $elementData = $this->createElementByDom($domElement);
+        
+        $widget = $this->filter->widgetFilter($domElement->firstChild->wholeText);
+        
+	    $elementData->setElements($widget->getBlock());
 
-        $filter = ObjectManager::getInstance()->get(\AlbertMage\PageBuilder\Model\Directive\Filter::class);
-        $block = $filter->filter($domElement->firstChild->wholeText);
-        $data['block'] = $block;
-        return $data;
+        return $elementData;
+        
     }
 }
