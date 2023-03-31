@@ -701,6 +701,27 @@ class Element extends DataObject implements ElementInterface
     }
 
     /**
+     * Get button text
+     *
+     * @return string|null Button text. Otherwise, null.
+     */
+    public function getButtonText()
+    {
+        return $this->getData(self::BUTTON_TEXT);
+    }
+
+    /**
+     * Set button text
+     *
+     * @param string $buttonText
+     * @return $this
+     */
+    public function setButtonText($buttonText)
+    {
+        return $this->setData(self::BUTTON_TEXT, $buttonText);
+    }
+
+    /**
      * Set content
      *
      * @param \AlbertMage\PageBuilder\Api\Data\ContentInterface[] $content

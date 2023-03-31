@@ -63,6 +63,8 @@ interface ElementInterface
 
     const TEXT = 'text'; // data attribute
 
+    const BUTTON_TEXT = 'button_text'; // data attribute
+
     const LINK = 'link'; // data attribute
 
     const IMAGE = 'image'; // data attribute
@@ -470,6 +472,22 @@ interface ElementInterface
      * @return $this
      */
     public function setText($text);
+
+    /**
+     * Get button text
+     *
+     * @return string|null Button text. Otherwise, null.
+     */
+    public function getButtonText();
+
+    /**
+     * Set button text
+     *
+     * @param string $buttonText
+     * @return $this
+     */
+    public function setButtonText($buttonText);
+
 
     /**
      * Get link

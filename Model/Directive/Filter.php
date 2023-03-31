@@ -122,49 +122,23 @@ class Filter
     }
 
     /**
-     * Filter the string as array data.
+     * Retrieve media file URL directive
      *
-     * @param string $value
-     * @return array
-     * @throws \Exception
+     * @param string[] $construction
+     * @return string
      */
-    public function contentFilter($value)
+    public function mediaDirective($construction)
     {
+        // phpcs:disable Magento2.Functions.DiscouragedFunction
+        $params = $this->getParameters(html_entity_decode($construction[2], ENT_QUOTES));
+        return 'http://192.168.199.193:9090/media/'.$params['url'];
+        return $this->storeManager->getStore()
+            ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $params['url'];
+    }
 
-        $data = [];
-
-        $value = preg_replace('/^[\s\x00]+|[\s\x00]+$/u', '', $value);
-
-        if (preg_match_all(self::CONSTRUCTION_PATTERN, $value, $constructions, PREG_SET_ORDER)) {
-            $replace = [];
-            foreach ($constructions as $construction) {
-                $replace[] = $construction[0];
-            }
-            $str = str_replace($replace, ',,', $value);
-            $arr = explode(',', $str);
-            foreach ($arr as $item) {
-                if (!empty($item)) {
-                    $data[] = $this->contentFilter($item);
-                } else {
-                    $construction = array_shift($constructions);
-                    if ($construction) {
-                        if ($arr = $this->{$construction[1].'Directive'}($construction)) {
-                            $data[] = $arr;
-                        }
-                    }
-                }
-            }
-        } else {
-            if ($value) {
-                $data[] = [
-                    'type' => 'text',
-                    'value' => $value
-                ];
-            }
-        }
-
-        return $data;
-
+    public function configDirective($construction)
+    {
+        return [];
     }
 
     /**
@@ -211,26 +185,6 @@ class Filter
 
         return $widget;
 
-    }
-
-    /**
-     * Retrieve media file URL directive
-     *
-     * @param string[] $construction
-     * @return string
-     */
-    public function mediaDirective($construction)
-    {
-        // phpcs:disable Magento2.Functions.DiscouragedFunction
-        $params = $this->getParameters(html_entity_decode($construction[2], ENT_QUOTES));
-        //return 'http://localhost:9090/media/'.$params['url'];
-        return $this->storeManager->getStore()
-            ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $params['url'];
-    }
-
-    public function configDirective($construction)
-    {
-        return [];
     }
 
     /**

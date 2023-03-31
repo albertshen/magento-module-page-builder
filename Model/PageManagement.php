@@ -43,6 +43,7 @@ class PageManagement implements \AlbertMage\PageBuilder\Api\PageManagementInterf
 		\AlbertMage\PageBuilder\Model\Dom $dom
 	)
 	{
+		$this->storeManager = $storeManager;
 		$this->pageFactory = $pageFactory;
 		$this->getPageByIdentifierInterfaceFactory = $getPageByIdentifierInterfaceFactory;
 		$this->dom = $dom;

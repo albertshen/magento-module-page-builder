@@ -39,7 +39,7 @@ class LinkElement
      * @return \AlbertMage\PageBuilder\Api\Data\LinkInterface
      * @throws LocalizedException
      */
-    public function parse(\DOMElement $domElement) 
+    public function parse(\DOMElement $domElement)
     {
 
         $linkType = $domElement->getAttribute('data-link-type');

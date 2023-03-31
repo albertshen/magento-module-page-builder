@@ -158,8 +158,15 @@ class Element implements ElementInterface
             $elementData->setOverlayColor($overlayColor);
         }
 
-        if ($content = $this->content->parse($overlayElement->firstChild->firstChild)) {
-            $elementData->setContent($content);
+        foreach($overlayElement->firstChild->childNodes as $item) {
+            if ('content' == $item->getAttribute('data-element')) {
+                if ($content = $this->content->parse($item)) {
+                    $elementData->setContent($content);
+                }
+            }
+            if ('button' == $item->getAttribute('data-element')) {
+                $elementData->setButtonText($item->textContent);
+            }
         }
 
         return $elementData;
