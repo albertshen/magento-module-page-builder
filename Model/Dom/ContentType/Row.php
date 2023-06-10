@@ -20,7 +20,12 @@ class Row extends \AlbertMage\PageBuilder\Model\Dom\Element
         $elementData = $this->createElementByDom($domElement);
 
         $elementData = $this->updateElementByDom($elementData, $domElement->childNodes[0]);
-        
+
+        if ($elementData->getData('enable_parallax') === '0' ) {
+            $elementData->unsetData('enable_parallax');
+            $elementData->unsetData('parallax_speed');
+        }
+
         $this->processor->processBackgound($elementData);
 
         $elements = [];

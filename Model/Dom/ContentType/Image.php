@@ -45,6 +45,10 @@ class Image extends \AlbertMage\PageBuilder\Model\Dom\Element
             }
         }
 
+        if ('caption' === $domElement->lastChild->getAttribute('data-element')) {
+            $elementData->setCaption($domElement->lastChild->textContent);
+        }
+
         $this->processor->processImage($image);
 
         $elementData->setImage($image);

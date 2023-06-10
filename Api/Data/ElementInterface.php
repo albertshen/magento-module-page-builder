@@ -77,6 +77,8 @@ interface ElementInterface
 
     const TAB_ITEMS = 'tab_items'; // data attribute
 
+    const CAPTION = 'caption';
+
     /****** Row attributes ******/
 
     /**
@@ -578,5 +580,20 @@ interface ElementInterface
      * @return $this
      */
     public function setTabItems($tabItems);
+
+    /**
+     * Get caption
+     *
+     * @return string|null Caption. Otherwise, null.
+     */
+    public function getCaption();
+
+    /**
+     * Set caption
+     *
+     * @param string $caption
+     * @return $this
+     */
+    public function setCaption($caption);
 
 }

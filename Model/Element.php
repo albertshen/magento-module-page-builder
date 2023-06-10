@@ -857,4 +857,25 @@ class Element extends DataObject implements ElementInterface
     {
         return $this->setData(self::TAB_ITEMS, $tabItems);
     }
+
+    /**
+     * Get caption
+     *
+     * @return string|null Caption. Otherwise, null.
+     */
+    public function getCaption()
+    {
+        return $this->getData(self::CAPTION);
+    }
+
+    /**
+     * Set caption
+     *
+     * @param string $caption
+     * @return $this
+     */
+    public function setCaption($caption)
+    {
+        return $this->setData(self::CAPTION, $caption);
+    }
 }
