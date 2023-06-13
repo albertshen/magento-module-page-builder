@@ -13,11 +13,19 @@ interface PageManagementInterface {
     /**
      * Retrieve page.
      *
+     * @param string $pageIdentifier
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface[]
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getPageByIdentifier(string $pageIdentifier);
+
+    /**
+     * Retrieve page.
+     *
      * @param string $pageId
      * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface[]
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getPage($pageId);
-
+    public function getPageById(int $pageId);
 
 }

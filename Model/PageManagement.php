@@ -61,7 +61,7 @@ class PageManagement implements \AlbertMage\PageBuilder\Api\PageManagementInterf
 	/**
 	 * @inheritdoc
 	 */
-	public function getPageById(string $pageId)
+	public function getPageById(int $pageId)
 	{
 		$page = $this->pageFactory->create()->load($pageId);
 		return $this->dom->parse($page->getContent());
