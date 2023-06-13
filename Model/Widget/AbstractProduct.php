@@ -119,13 +119,13 @@ abstract class AbstractProduct extends \Magento\Framework\DataObject implements 
         \Magento\Rule\Model\Condition\Sql\Builder $sqlBuilder,
         \Magento\CatalogWidget\Model\Rule $rule,
         \Magento\Widget\Helper\Conditions $conditionsHelper,
-        array $params = [],
         CategoryRepositoryInterface $categoryRepository = null,
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Catalog\Model\Config $catalogConfig,
         ServiceOutputProcessor $serviceOutputProcessor,
-        ProductManagementInterface $productManagement
+        ProductManagementInterface $productManagement,
+        array $params = [],
     ) {
         $this->productCollectionFactory = $productCollectionFactory;
         $this->catalogProductVisibility = $catalogProductVisibility;
