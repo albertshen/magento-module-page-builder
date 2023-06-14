@@ -57,7 +57,7 @@ interface DirectiveInterface
     /**
      * Set url
      *
-     * @param array $url
+     * @param string $url
      * @return $this
      */
     public function setUrl($url);

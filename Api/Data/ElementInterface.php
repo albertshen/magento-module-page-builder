@@ -61,6 +61,8 @@ interface ElementInterface
 
     const CONTENT = 'content'; // data attribute
 
+    const CONTENT_RAW = 'content_raw'; // data attribute
+
     const TEXT = 'text'; // data attribute
 
     const BUTTON_TEXT = 'button_text'; // data attribute
@@ -459,6 +461,21 @@ interface ElementInterface
      * @return $this
      */
     public function setContent($content);
+
+    /**
+     * Get content raw
+     *
+     * @return string|null contentRaw. Otherwise, null.
+     */
+    public function getContentRaw();
+
+    /**
+     * Set content
+     *
+     * @param string $contentRaw
+     * @return $this
+     */
+    public function setContentRaw($contentRaw);
 
     /**
      * Get text

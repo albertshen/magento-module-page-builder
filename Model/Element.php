@@ -670,16 +670,6 @@ class Element extends DataObject implements ElementInterface
     }
 
     /**
-     * Get content
-     *
-     * @return \AlbertMage\PageBuilder\Api\Data\ContentInterface[]|null Content. Otherwise, null.
-     */
-    public function getContent()
-    {
-        return $this->getData(self::CONTENT);
-    }
-
-    /**
      * Get text
      *
      * @return string|null Text. Otherwise, null.
@@ -722,6 +712,16 @@ class Element extends DataObject implements ElementInterface
     }
 
     /**
+     * Get content
+     *
+     * @return \AlbertMage\PageBuilder\Api\Data\ContentInterface[]|null Content. Otherwise, null.
+     */
+    public function getContent()
+    {
+        return $this->getData(self::CONTENT);
+    }
+
+    /**
      * Set content
      *
      * @param \AlbertMage\PageBuilder\Api\Data\ContentInterface[] $content
@@ -730,6 +730,27 @@ class Element extends DataObject implements ElementInterface
     public function setContent($content)
     {
         return $this->setData(self::CONTENT, $content);
+    }
+
+    /**
+     * Get content raw
+     *
+     * @return string|null contentRaw. Otherwise, null.
+     */
+    public function getContentRaw()
+    {
+        return $this->getData(self::CONTENT_RAW);
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $contentRaw
+     * @return $this
+     */
+    public function setContentRaw($contentRaw)
+    {
+        return $this->setData(self::CONTENT_RAW, $contentRaw);
     }
 
     /**

@@ -16,11 +16,16 @@ class Text extends \AlbertMage\PageBuilder\Model\Dom\Element
      * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface
      * @throws LocalizedException
      */
-    public function parse($domElement)
+    public function parse(\DOMElement $domElement)
     {
         $elementData = $this->createElementByDom($domElement);
         $content = $this->content->parse($domElement);
         $elementData->setContent($content);
+        $rawContent = '';
+        foreach ($domElement->childNodes as $childNode) {
+            $rawContent .= $childNode->ownerDocument->saveXML($childNode);
+        }
+        $elementData->setContentRaw($rawContent);
         return $elementData;
     }
 

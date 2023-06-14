@@ -12,7 +12,7 @@ interface ElementInterface
     /**
      * Parse Dom
      *
-     * @return array
+     * @return \AlbertMage\PageBuilder\Api\Data\ElementInterface
      * @throws LocalizedException
      */
     public function parse(\DOMElement $domElement);

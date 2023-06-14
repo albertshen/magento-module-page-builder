@@ -162,6 +162,11 @@ class Element implements ElementInterface
             if ('content' == $item->getAttribute('data-element')) {
                 if ($content = $this->content->parse($item)) {
                     $elementData->setContent($content);
+                    $rawContent = '';
+                    foreach ($item->childNodes as $childNode) {
+                        $rawContent .= $childNode->ownerDocument->saveXML($childNode);
+                    }
+                    $elementData->setContentRaw($rawContent);
                 }
             }
             if ('button' == $item->getAttribute('data-element')) {
