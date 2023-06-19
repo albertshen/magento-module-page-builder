@@ -37,6 +37,8 @@ class Dom
     public function parse($content): array
     {
         
+        $content = ltrim(rtrim(preg_replace(array("/> *([^ ]*) *</","/<!--[^!]*-->/","'/\*[^*]*\*/'","/\r\n/","/\n/","/\t/",'/>[ ]+</'),array(">\\1<",'','','','','','><'), $content)));
+
         $crawler = new Crawler($content);
 
         $crawler = $crawler->filter('body > div');
