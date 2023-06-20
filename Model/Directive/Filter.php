@@ -132,7 +132,7 @@ class Filter
         // phpcs:disable Magento2.Functions.DiscouragedFunction
         $params = $this->getParameters(html_entity_decode($construction[2], ENT_QUOTES));
         //return 'https://172.20.10.6:9090/media/'.$params['url'];
-        return 'http://192.168.199.193:9090/media/'.$params['url'];
+        //return 'http://192.168.199.193:9090/media/'.$params['url'];
         return $this->storeManager->getStore()
             ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $params['url'];
     }
