@@ -21,7 +21,7 @@ class ProductList extends AbstractProduct
         $data = [];
         $block = $this->createCollection();
         foreach ($block->getItems() as $product) {
-            $data[] = $this->productManagement->getListItem($product->getId());
+            $data[] = $this->productManagement->getListItem($product);
         }
         return $data;
     }
